@@ -96,38 +96,43 @@ framexrightmargin=10pt
 \onehalfspacing  % espaçamento
 
 % ---------------------------------------------------------------------------- %
+% Variáveis
+
+\newcommand{\mydocumenttitle}{Uma Abordagem Baseada em Ontologias para a Predição de Ligações entre Pesquisadores em Redes de Colaboração Científica}
+
+
+% ---------------------------------------------------------------------------- %
 % CAPA
 % Nota: O título para as dissertações/teses do IME-USP devem caber em um
 % orifício de 10,7cm de largura x 6,0cm de altura que há na capa fornecida pela SPG.
 \thispagestyle{empty}
 \begin{center}
     \vspace*{2.3cm}
-    \textbf{\Large{Predição de Ligações em Redes de Colaboração Científica}}\\
+    \textbf{\Large{\mydocumenttitle{}}}\\
 
     \vspace*{1.2cm}
     \Large{Thiago Henrique Dias Araujo}
 
     \vskip 2cm
     \textsc{
-    Dissertação/Tese apresentada\\[-0.25cm]
+    Texto apresentado\\[-0.25cm]
     ao\\[-0.25cm]
     Instituto de Matemática e Estatística\\[-0.25cm]
     da\\[-0.25cm]
     Universidade de São Paulo\\[-0.25cm]
     para\\[-0.25cm]
-    obtenção do título\\[-0.25cm]
+    o Exame de Qualificação\\[-0.25cm]
     de\\[-0.25cm]
-    Mestre/Doutor em Ciências}
+    Mestre em Ciências}
 
     \vskip 1.5cm
     Programa: Mestrado em Ciência da Computação\\
-    Orientador: Prof. Dr. Renata Wassermann\\
-    Coorientador: Prof. Dr. Nome do Coorientador
+    Orientadora: Profª. Drª. Renata Wassermann
 
    	\vskip 1cm
 
     \vskip 0.5cm
-    \normalsize{São Paulo, fevereiro de 2011}
+    \normalsize{São Paulo, março de 2016}
 \end{center}
 
 % ---------------------------------------------------------------------------- %
@@ -144,17 +149,19 @@ framexrightmargin=10pt
 \thispagestyle{empty}
     \begin{center}
         \vspace*{2.3 cm}
-        \textbf{\Large{Título do trabalho a ser apresentado à \\
-        CPG para a dissertação/tese}}\\
+        \textbf{\Large{\mydocumenttitle{}}}\\
         \vspace*{2 cm}
     \end{center}
 
     \vskip 2cm
 
     \begin{flushright}
-	Esta é a versão original da dissertação/tese elaborada pelo\\
-	candidato (Nome Completo do Aluno), tal como \\
-	submetida à Comissão Julgadora.
+	Esta é a versão original do texto elaborado pelo\\
+	candidato Thiago Henrique Dias Araujo para o\\
+  exame de qualificação apresentado ao Instituto\\
+  de Matemática e Estatística da Universidade de\\
+  São Paulo como requisito para obtenção de título\\
+  de Mestre em Ciências.
     \end{flushright}
 
 \pagebreak
@@ -173,61 +180,60 @@ framexrightmargin=10pt
 %   à Comissão Julgadora antes da defesa
 %
 %
-\newpage
-\thispagestyle{empty}
-    \begin{center}
-        \vspace*{2.3 cm}
-        \textbf{\Large{Título do trabalho a ser apresentado à \\
-        CPG para a dissertação/tese}}\\
-        \vspace*{2 cm}
-    \end{center}
-
-    \vskip 2cm
-
-    \begin{flushright}
-	Esta versão da dissertação/tese contém as correções e alterações sugeridas\\
-	pela Comissão Julgadora durante a defesa da versão original do trabalho,\\
-	realizada em 14/12/2010. Uma cópia da versão original está disponível no\\
-	Instituto de Matemática e Estatística da Universidade de São Paulo.
-
-    \vskip 2cm
-
-    \end{flushright}
-    \vskip 4.2cm
-
-    \begin{quote}
-    \noindent Comissão Julgadora:
-
-    \begin{itemize}
-		\item Profª. Drª. Nome Completo (orientadora) - IME-USP [sem ponto final]
-		\item Prof. Dr. Nome Completo - IME-USP [sem ponto final]
-		\item Prof. Dr. Nome Completo - IMPA [sem ponto final]
-    \end{itemize}
-
-    \end{quote}
-\pagebreak
-
-
-\pagenumbering{roman}     % começamos a numerar
-
+%\newpage
+%\thispagestyle{empty}
+%    \begin{center}
+%        \vspace*{2.3 cm}
+%        \textbf{\Large{Título do trabalho a ser apresentado à \\
+%        CPG para a dissertação/tese}}\\
+%        \vspace*{2 cm}
+%    \end{center}
+%
+%    \vskip 2cm
+%
+%    \begin{flushright}
+%	Esta versão da dissertação/tese contém as correções e alterações sugeridas\\
+%	pela Comissão Julgadora durante a defesa da versão original do trabalho,\\
+%	realizada em 14/12/2010. Uma cópia da versão original está disponível no\\
+%	Instituto de Matemática e Estatística da Universidade de São Paulo.
+%
+%    \vskip 2cm
+%
+%    \end{flushright}
+%    \vskip 4.2cm
+%
+%    \begin{quote}
+%    \noindent Comissão Julgadora:
+%
+%    \begin{itemize}
+%		\item Profª. Drª. Nome Completo (orientadora) - IME-USP [sem ponto final]
+%		\item Prof. Dr. Nome Completo - IME-USP [sem ponto final]
+%		\item Prof. Dr. Nome Completo - IMPA [sem ponto final]
+%    \end{itemize}
+%
+%    \end{quote}
+%\pagebreak
+%
+%
+%\pagenumbering{roman}     % começamos a numerar
+%
 % ---------------------------------------------------------------------------- %
 % Agradecimentos:
 % Se o candidato não quer fazer agradecimentos, deve simplesmente eliminar esta página
-\chapter*{Agradecimentos}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto. Texto opcional.
+%\chapter*{Agradecimentos}
+%Texto texto texto texto texto texto texto texto texto texto texto texto texto
+%texto texto texto texto texto texto texto texto texto texto texto texto texto
+%texto texto texto texto texto texto texto texto texto texto texto texto texto
+%texto texto texto texto. Texto opcional.
 
 
 % ---------------------------------------------------------------------------- %
 % Resumo
 \chapter*{Resumo}
 
-\noindent SOBRENOME, A. B. C. \textbf{Título do trabalho em português}.
-2010. 120 f.
-Tese (Doutorado) - Instituto de Matemática e Estatística,
-Universidade de São Paulo, São Paulo, 2010.
+\noindent ARAUJO, T. H. D. \textbf{\mydocumenttitle{}}.
+2016. 20 f. Exame de qualificação (Mestrado) - Instituto de Matemática e Estatística,
+Universidade de São Paulo, São Paulo, 2016.
 \\
 
 Elemento obrigatório, constituído de uma sequência de frases concisas e
@@ -253,10 +259,10 @@ texto texto.
 % ---------------------------------------------------------------------------- %
 % Abstract
 \chapter*{Abstract}
-\noindent SOBRENOME, A. B. C. \textbf{Título do trabalho em inglês}.
-2010. 120 f.
-Tese (Doutorado) - Instituto de Matemática e Estatística,
-Universidade de São Paulo, São Paulo, 2010.
+\noindent ARAUJO, T. H. D. \textbf{\mydocumenttitle{}}.
+2016. 20 f.
+Exame de qualificação (Mestrado) - Instituto de Matemática e Estatística,
+Universidade de São Paulo, São Paulo, 2016.
 \\
 
 
@@ -319,7 +325,7 @@ text text text.
 \fancyhead[RE,LO]{}
 \appendix
 
-\include{ape-conjuntos}      % associado ao arquivo: 'ape-conjuntos.tex'
+%\include{ape-conjuntos}      % associado ao arquivo: 'ape-conjuntos.tex'
 
 % ---------------------------------------------------------------------------- %
 % Bibliografia
@@ -329,12 +335,12 @@ text text text.
 
 % ---------------------------------------------------------------------------- %
 % Índice remissivo
-\index{TBP|see{periodicidade região codificante}}
-\index{DSP|see{processamento digital de sinais}}
-\index{STFT|see{transformada de Fourier de tempo reduzido}}
-\index{DFT|see{transformada discreta de Fourier}}
-\index{Fourier!transformada|see{transformada de Fourier}}
+%\index{TBP|see{periodicidade região codificante}}
+%\index{DSP|see{processamento digital de sinais}}
+%\index{STFT|see{transformada de Fourier de tempo reduzido}}
+%\index{DFT|see{transformada discreta de Fourier}}
+%\index{Fourier!transformada|see{transformada de Fourier}}
 
-\printindex   % imprime o índice remissivo no documento
+%\printindex   % imprime o índice remissivo no documento
 
 \end{document}
