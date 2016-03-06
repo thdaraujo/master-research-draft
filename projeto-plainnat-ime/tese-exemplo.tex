@@ -1,19 +1,19 @@
 % Arquivo LaTeX de exemplo de dissertação/tese a ser apresentados à CPG do IME-USP
-% 
+%
 % Versão 5: Sex Mar  9 18:05:40 BRT 2012
 %
 % Criação: Jesús P. Mena-Chalco
 % Revisão: Fabio Kon e Paulo Feofiloff
-%  
+%
 % Obs: Leia previamente o texto do arquivo README.txt
 
 \documentclass[11pt,twoside,a4paper]{book}
 
 % ---------------------------------------------------------------------------- %
-% Pacotes 
+% Pacotes
 \usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[pdftex]{graphicx}           % usamos arquivos pdf/png como figuras
 \usepackage{setspace}                   % espaçamento flexível
 \usepackage{indentfirst}                % indentação do primeiro parágrafo
@@ -45,7 +45,7 @@
 
 % ---------------------------------------------------------------------------- %
 \graphicspath{{./figuras/}}             % caminho das figuras (recomendável)
-\frenchspacing                          % arruma o espaço: id est (i.e.) e exempli gratia (e.g.) 
+\frenchspacing                          % arruma o espaço: id est (i.e.) e exempli gratia (e.g.)
 \urlstyle{same}                         % URL com o mesmo estilo do texto e não mono-spaced
 \makeindex                              % para o índice remissivo
 \raggedbottom                           % para não permitir espaços extra no texto
@@ -85,7 +85,7 @@ framexrightmargin=10pt
 % ---------------------------------------------------------------------------- %
 % Corpo do texto
 \begin{document}
-\frontmatter 
+\frontmatter
 % cabeçalho para as páginas das seções anteriores ao capítulo 1 (frontmatter)
 \fancyhead[RO]{{\footnotesize\rightmark}\hspace{2em}\thepage}
 \setcounter{tocdepth}{2}
@@ -97,20 +97,19 @@ framexrightmargin=10pt
 
 % ---------------------------------------------------------------------------- %
 % CAPA
-% Nota: O título para as dissertações/teses do IME-USP devem caber em um 
+% Nota: O título para as dissertações/teses do IME-USP devem caber em um
 % orifício de 10,7cm de largura x 6,0cm de altura que há na capa fornecida pela SPG.
 \thispagestyle{empty}
 \begin{center}
     \vspace*{2.3cm}
-    \textbf{\Large{Título do trabalho a ser apresentado à \\
-    CPG para a dissertação/tese}}\\
-    
+    \textbf{\Large{Predição de Ligações em Redes de Colaboração Científica}}\\
+
     \vspace*{1.2cm}
-    \Large{Nome completo do Autor}
-    
+    \Large{Thiago Henrique Dias Araujo}
+
     \vskip 2cm
     \textsc{
-    Dissertação/Tese apresentada\\[-0.25cm] 
+    Dissertação/Tese apresentada\\[-0.25cm]
     ao\\[-0.25cm]
     Instituto de Matemática e Estatística\\[-0.25cm]
     da\\[-0.25cm]
@@ -119,16 +118,14 @@ framexrightmargin=10pt
     obtenção do título\\[-0.25cm]
     de\\[-0.25cm]
     Mestre/Doutor em Ciências}
-    
+
     \vskip 1.5cm
-    Programa: Nome do Programa\\
-    Orientador: Prof. Dr. Nome do Orientador\\
+    Programa: Mestrado em Ciência da Computação\\
+    Orientador: Prof. Dr. Renata Wassermann\\
     Coorientador: Prof. Dr. Nome do Coorientador
 
    	\vskip 1cm
-    \normalsize{Durante o desenvolvimento deste trabalho o autor recebeu auxílio
-    financeiro da CAPES/CNPq/FAPESP}
-    
+
     \vskip 0.5cm
     \normalsize{São Paulo, fevereiro de 2011}
 \end{center}
@@ -167,7 +164,7 @@ framexrightmargin=10pt
 % Página de rosto (SÓ PARA A VERSÃO CORRIGIDA - APÓS DEFESA)
 % Resolução CoPGr 5890 (20/12/2010)
 %
-% Nota: O título para as dissertações/teses do IME-USP devem caber em um 
+% Nota: O título para as dissertações/teses do IME-USP devem caber em um
 % orifício de 10,7cm de largura x 6,0cm de altura que há na capa fornecida pela SPG.
 %
 % IMPORTANTE:
@@ -200,22 +197,22 @@ framexrightmargin=10pt
 
     \begin{quote}
     \noindent Comissão Julgadora:
-    
+
     \begin{itemize}
 		\item Profª. Drª. Nome Completo (orientadora) - IME-USP [sem ponto final]
 		\item Prof. Dr. Nome Completo - IME-USP [sem ponto final]
 		\item Prof. Dr. Nome Completo - IMPA [sem ponto final]
     \end{itemize}
-      
+
     \end{quote}
 \pagebreak
 
 
-\pagenumbering{roman}     % começamos a numerar 
+\pagenumbering{roman}     % começamos a numerar
 
 % ---------------------------------------------------------------------------- %
 % Agradecimentos:
-% Se o candidato não quer fazer agradecimentos, deve simplesmente eliminar esta página 
+% Se o candidato não quer fazer agradecimentos, deve simplesmente eliminar esta página
 \chapter*{Agradecimentos}
 Texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto texto texto texto texto texto texto
@@ -227,7 +224,7 @@ texto texto texto texto. Texto opcional.
 % Resumo
 \chapter*{Resumo}
 
-\noindent SOBRENOME, A. B. C. \textbf{Título do trabalho em português}. 
+\noindent SOBRENOME, A. B. C. \textbf{Título do trabalho em português}.
 2010. 120 f.
 Tese (Doutorado) - Instituto de Matemática e Estatística,
 Universidade de São Paulo, São Paulo, 2010.
@@ -237,7 +234,7 @@ Elemento obrigatório, constituído de uma sequência de frases concisas e
 objetivas, em forma de texto.  Deve apresentar os objetivos, métodos empregados,
 resultados e conclusões.  O resumo deve ser redigido em parágrafo único, conter
 no máximo 500 palavras e ser seguido dos termos representativos do conteúdo do
-trabalho (palavras-chave). 
+trabalho (palavras-chave).
 Texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto texto texto texto texto texto texto
 texto texto texto texto texto texto texto texto texto texto texto texto texto
@@ -256,7 +253,7 @@ texto texto.
 % ---------------------------------------------------------------------------- %
 % Abstract
 \chapter*{Abstract}
-\noindent SOBRENOME, A. B. C. \textbf{Título do trabalho em inglês}. 
+\noindent SOBRENOME, A. B. C. \textbf{Título do trabalho em inglês}.
 2010. 120 f.
 Tese (Doutorado) - Instituto de Matemática e Estatística,
 Universidade de São Paulo, São Paulo, 2010.
@@ -265,7 +262,7 @@ Universidade de São Paulo, São Paulo, 2010.
 
 Elemento obrigatório, elaborado com as mesmas características do resumo em
 língua portuguesa. De acordo com o Regimento da Pós- Graduação da USP (Artigo
-99), deve ser redigido em inglês para fins de divulgação. 
+99), deve ser redigido em inglês para fins de divulgação.
 Text text text text text text text text text text text text text text text text
 text text text text text text text text text text text text text text text text
 text text text text text text text text text text text text text text text text
@@ -300,8 +297,8 @@ text text text.
 
 % ---------------------------------------------------------------------------- %
 % Listas de figuras e tabelas criadas automaticamente
-\listoffigures            
-\listoftables            
+\listoffigures
+\listoftables
 
 % ---------------------------------------------------------------------------- %
 % Capítulos do trabalho
@@ -338,6 +335,6 @@ text text text.
 \index{DFT|see{transformada discreta de Fourier}}
 \index{Fourier!transformada|see{transformada de Fourier}}
 
-\printindex   % imprime o índice remissivo no documento 
+\printindex   % imprime o índice remissivo no documento
 
 \end{document}
