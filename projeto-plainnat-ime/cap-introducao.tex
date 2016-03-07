@@ -22,29 +22,40 @@ texto texto texto texto texto texto texto.
 \label{sec:objetivos}
 
 O objetivo do presente trabalho é demonstrar que um modelo de predição de ligações em uma rede de colaboração científica, quando enriquecido com conhecimento prévio (\textit{background knowledge}) extraído de uma ontologia, se torna mais eficaz em sua tarefa de predição.
-Para isso, espera-se que os seguintes passos sejam cumpridos:
+Para isso, espera-se cumprir os seguintes passos:
 
 \begin{itemize}
     \item Modelar uma Ontologia para representar o conhecimento a respeito de uma rede de colaboração científica, contendo informações sobre pesquisadores, publicações e colaborações, e instituições.
-    \item Construir consultas em SPARQL, que utilizam regras de inferência na Ontologia, e cujo resultado seja utilizado como conhecimento prévio para enriquecer o modelo de predição. Algumas dessas consultas são:
+    \item Construir consultas em SPARQL, que utilizam regras de inferência na Ontologia, que serão utilizadas como conhecimento prévio. Algumas dessas consultas são:
     \begin{itemize}
         \item Qual a área de pesquisa de um pesquisador?
-        \item Quais são os pesquisadores que foram orientados por um dado pesquisador?
-        \item Há quantos anos um dado pesquisador freqüenta uma instituição?
+        \item Quem são os pesquisadores que  ele orientou?
+        \item Há quantos anos um dado pesquisador trabalha em uma instituição?
     \end{itemize}
-    \item Construir um modelo de predição de ligações, baseado no trabalho de \citet{Cervantes2014}.
-    \item Enriquecer o modelo de predição com as informações extraídas da ontologia.
-    \item Comparar a eficácia dos dois modelos.
-    \item Propor novas consultas que possam ser utilizadas como conhecimento prévio e fazer novas comparações.
+    \item Construir um modelo de predição de ligações baseado no trabalho de \citet{Cervantes2014}.
+    \item Enriquecer o modelo de predição com o conhecimento prévio extraído da ontologia, e comparar a eficácia dos dois modelos.
+    \item Propor novas consultas à ontologia que possam ser utilizadas como conhecimento prévio aplicado ao modelo, e fazer novos testes.
 \end{itemize}
 
 %% ------------------------------------------------------------------------- %%
 \section{Metodologia}
 \label{sec:metodologia}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto.
+Os objetivos traçados serão alcançados através da execução dos seguintes ítens:
+
+\begin{enumerate}
+    \item \textbf{Estudo dos resultados de \citet{Cervantes2014}}: \\
+      O objetivo desse ítem é entender o modelo de representação das redes de colaboração como grafos com atributos e o modelo de predição utilizando aprendizado supervisionado para que possa ser implementado e enriquecido.
+    \item \textbf{Estudo sobre modelagem de Ontologias e Consultas via SPARQL}: \\
+      O objetivo desse ítem é  ...
+    \item \textbf{Propor uma forma de extração de conhecimento prévio da ontologia}: \\
+      O objetivo desse ítem é propor um método de extração das informações obtidas via consulta da ontologia, construção de uma base de conhecimento prévio, e utilização desse conhecimento no enriquecimento do modelo, via adição de novos atributos aos vértices da rede de colaboraçào científica .
+    \item \textbf{Executar a ideia proposta}: \\
+      Desenvolver um algoritmo que recebe como entrada um conjunto de dados sobre pesquisadores, suas publicações e seus coautores, que seja capaz de popular a ontologia e extrair dela o conhecimento prévio, enriquecer o modelo de predição, e executá-lo. %TODO falar da saída?
+    \item \textbf{Realizar teste da ideia com informações da Plataforma Lattes}: \\
+      Preparar um ambiente de testes, que contenha um conjunto de dados extraídos da Plataforma Lattes através do \textit{scriptLattes} e a ontologia. Popular a ontologia, e extrair o conhecimento prévio. Rodar o modelo de predição com e sem o enriquecimento com conhecimento, e comparar os resultados. %TODO ajustar
+\end{enumerate}
+
 
 %% ------------------------------------------------------------------------- %%
 \section{Contribuições}
