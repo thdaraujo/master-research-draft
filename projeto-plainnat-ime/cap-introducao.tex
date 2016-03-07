@@ -25,16 +25,17 @@ O objetivo do presente trabalho é demonstrar que um modelo de predição de lig
 Para isso, espera-se que os seguintes passos sejam cumpridos:
 
 \begin{itemize}
-    \item Modelar uma Ontologia para representar Conhecimento a respeito de uma rede de colaboração científica, contendo informações sobre pesquisadores, publicações e colaborações, instituições e grupos de pesquisa.
-    \item Construir consultas em SPARQL, que utilizam regras de inferência na Ontologia, e cujo resultado será utilizado como conhecimento prévio para enriquecer o modelo de predição. Algumas dessas consultas são:
+    \item Modelar uma Ontologia para representar o conhecimento a respeito de uma rede de colaboração científica, contendo informações sobre pesquisadores, publicações e colaborações, e instituições.
+    \item Construir consultas em SPARQL, que utilizam regras de inferência na Ontologia, e cujo resultado seja utilizado como conhecimento prévio para enriquecer o modelo de predição. Algumas dessas consultas são:
     \begin{itemize}
         \item Qual a área de pesquisa de um pesquisador?
         \item Quais são os pesquisadores que foram orientados por um dado pesquisador?
-        \item Há quantos anos um dado pesquisador frequenta uma instituição?
+        \item Há quantos anos um dado pesquisador freqüenta uma instituição?
     \end{itemize}
-    e comparar sua taxa de acerto com o método
-    de aprendizado supervisionado \textit{SVM}, utilizado por \citet{MohammadAlHasan} e
-    \citet{Cervantes2014} no problema de predição de ligações.
+    \item Construir um modelo de predição de ligações, baseado no trabalho de \citet{Cervantes2014}.
+    \item Enriquecer o modelo de predição com as informações extraídas da ontologia.
+    \item Comparar a eficácia dos dois modelos.
+    \item Propor novas consultas que possam ser utilizadas como conhecimento prévio e fazer novas comparações.
 \end{itemize}
 
 %% ------------------------------------------------------------------------- %%
