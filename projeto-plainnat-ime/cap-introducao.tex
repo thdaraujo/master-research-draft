@@ -17,6 +17,7 @@ Várias técnicas de análise podem ser empregadas nesse problema, desde as mais
 Como é usual no método científico, encontramos algumas limitações nessas ferramentas, geralmente derivadas de métodos da área de Aprendizado de Máquina. Algumas também não levam em consideração características dos pesquisadores, mas apenas da estrutura da rede. Existem representações mais expressivas que poderiam ser aplicadas ao domínio com facilidade, e várias técnicas relacionadas à área de Sistemas Baseados em Conhecimento que simplificariam essa tarefa, e aumentariam sua eficácia.
 
 %TODO falar em como seria melhor usar SBC?
+%Está meio fraco...
 
 Com o presente trabalho, esperamos contribuir para esse tipo de análise, aplicando técnicas de Sistemas Baseados em Conhecimento, e comparando o resultado com outros trabalhos, para demonstrar a eficácia das técnicas propostas.
 
@@ -24,9 +25,15 @@ Com o presente trabalho, esperamos contribuir para esse tipo de análise, aplica
 \section{Motivação}
 \label{sec:motivacao}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto.
+Uma rede social é uma estrutura relacional que podemos facilmente representar por um grafo com atributos (\citet{Cervantes2014}), ou por uma ontologia (\citet{Anaue2009}), ou até mesmo como um banco de dados. Uma rede de colaboração científica possui uma natureza multi-relacional, pois uma publicação pode ter vários tipos de relacionamento diferentes, como citações, autoria, veículo de publicação, dentre outros. E um autor pode se relacionar com outro via coautoria de um artigo, participação em banca ou conferência, fazendo parte do mesmo grupo de pesquisa, ou tendo interesses similares, dentre inúmeras outras relações possíveis. Todos esses atributos podem contribuir na análise da estrutura dessa rede.
+
+Entretanto, se desejamos aplicar um modelo de aprendizado para analisar alguma característica da rede, geralmente utilizamos modelos que recebem como entrada tabelas de atributos e valores. Por causa disso, é preciso transformar uma representação relacional mais rica (como um grafo) em uma representação mais simples (como uma tabela). Portanto, podemos dizer que uma ferramenta de aprendizado supervisionado desse tipo utiliza representações pouco expressivas. Segundo \citet{Raedt2008}, existem várias representações que podem ser utilizadas para modelar um problema de aprendizado, algumas mais expressivas, outras menos. Ele mostra em seu trabalho que existe uma hierarquia dessas representações em uma ordem crescente de expressividade.
+
+Além da análise da estrutura da rede, podemos investigar outras características, como o perfil de um pesquisador, seu currículo, sua experiência, e quem são seus pares. Ou a área de pesquisa onde estão inseridas as suas publicações mais importantes. E não é nada fácil representar esse tipo de informação em tabelas de atributos e valores.
+
+A principal motivação do trabalho é a possibilidade de se utilizar conhecimento prévio do domínio, também chamado de \textit{background-knowledge}. A proposta é construir uma ontologia que representa a rede de colaboração, capaz de inferir novas relações, regras, e derivar novas características das entidades pertencentes ao domínio. Assim, é possível extrair esse conhecimento (\textit{background-knowledge}) e transformá-lo em novos atributos da rede de colaboração, enriquecendo os dados a serem explorados pelo modelo de predição. Esperamos, com isso, aumentar a eficiência do modelo.
+
+ A principal vantagem do uso de uma ontologia é que o conhecimento extraído é declarativo, compacto e de alto-nível, o que simplifica a sua análise e validação. Sem contar que esse conhecimento a respeito de uma entidade do domínio pode se espalhar para outras, e gerar novos atributos. %TODO explicar melhor isso, dar um exemplo.
 
 
 %% ------------------------------------------------------------------------- %%
