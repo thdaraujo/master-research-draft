@@ -2,18 +2,97 @@
 \chapter{Trabalhos Correlatos}
 \label{cap:correlatos}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto.
+Neste capítulo, apresentamos algumas contribuições importantes que tratam do problema de análise de redes de colaboração científica e predição de ligações, e outros trabalhos relacionados que serviram de inspiração para este projeto de pesquisa.
+
 
 %% ------------------------------------------------------------------------- %%
-\section{Fundamentos}
-\label{sec:fundamentos}
+\section{scriptLattes}
+\label{sec:scriptLattes}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto.
+A Plataforma Lattes é uma plataforma vinculada ao CNPq, e a mais importante base integrada de currículos, grupos de pesquisa e instituições de ensino do Brasil, registrando informações valiosas sobre as atividades de pesquisa e o perfil de pesquisadores de diversas áreas da Ciência e Tecnologia em todo o país.
+
+O projeto \textit{scriptLattes}, proposto por \citet{Mena-Chalco2009}, é um sistema capaz de fazer mineração dos dados de currículos presentes na Plataforma Lattes e gerar vários relatórios acadêmicos, além de disponibilizar informações sobre as publicações dos pesquisadores brasileiros, fazendo desambiguação dos autores e artigos, e exportando dados sobre coautoria e outros tipos de colaboração.
+
+O presente trabalho vai utilizar uma base de mais de 4 milhões de currículos extraídos da Plataforma Lattes, gentilmente cedida pelo professor Jesús P. Mena-Chalco, como base de testes para o modelo aqui proposto.
+
+
+%% ------------------------------------------------------------------------- %%
+\section{Predição de Ligações}
+\label{sec:link-prediction}
+
+Vários trabalhos presentes na literatura exploram o problema da predição de ligações (\textit{link prediction}) em redes sociais. Esse problema possui diversas aplicações, como na análise e reconstrução de redes e em sistemas que utilizam informações pessoais para sugerir novos contatos ou novos amigos. Outros pretendiam detectar ligações entre pessoas em redes terroristas, com o intuito de prevenir ataques. Uma aplicação interessante tinha por intuito encontrar artigos ou documentos relacionados e sugerir citações.
+
+Discutimos a seguir alguns trabalhos relevantes.
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Importância de um pesquisador, financiamento, e quantidade de colaboradores em um projeto}
+\label{ssec:importance}
+
+Em \citet{Ebadi2015}, encontramos uma análise muito apurada sobre uma rede de colaboração científica, que serviu para determinar os fatores que determinam a importância de um pesquisador nessa rede, sua centralidade e sua produtividade. Foram feitas várias constatações interessantes. Descobriram, por exemplo, que grupos ligados a organizações que produziam muitos artigos importantes acabavam tendo uma melhor performance do que outros grupos.
+
+Outro fato interessante é que a experiência e os anos de trabalho de um indivíduo faz com que ele seja mais conhecido em sua comunidade. Tendo acesso a dados sobre financiamento e fomento à pesquisa, constataram que indivíduos que participam de pesquisas fomentadas por indústrias e empresas acabam atraindo mais colaboradores.
+
+Essa análise também foi baseada em medidas feitas na estrutura da rede, como a centralidade dos vértices, \textit{eigenvectors} e coeficientes de agrupamento, numero médio de coautores (ligações) de um dado pesquisador, dentre outros indicadores. Com essas medidas, foi possível encontrar os líderes de diversas comunidades, que são pessoas com grande influencia local.
+
+Descobriram, ainda, que os pesquisadores mais produtivos e com o trabalho de melhor qualidade também eram os mais colaborativos. Também mostraram a influência que o financiamento causa nas redes locais de colaboração ao longo do tempo, fazendo com que os cientistas que recebem financiamento e ocupam posições de liderança busquem coautores em outras comunidades mais distantes em vez de aumentar suas conexões na comunidade local.
+
+%TODO citar hiperautoria? Tem relacao com colaboracoes... Poderia citar rapidamente um daqueles trabalhos sobre hiperautoria.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Predição utilizando Aprendizado Supervisionado}
+\label{ssec:graphs-with-attributes}
+
+\citet{MohammadAlHasan} aplicou e comparou a eficácia de diversas técnicas de aprendizado supervisionado, tais como  \textit{SVMs}, \textit{Árvores de Decisão}, \textit{Multilayer Perceptrons}, modelos de classificação utilizando kNN (\textit{k-nearest neighbors}), \textit{Naive Bayes}, e \textit{RBF Networks}.
+
+O uso de \textit{SVMs} mostrou-se melhor do que as outras técnicas, por obter uma taxa de acerto um pouco maior, e também por possibilitar a escolha das características importantes a serem utilizadas pelo modelo, através de um método automatizado de escolha de características.
+
+O aspecto mais importante desse projeto é que a escolha do algoritmo não parece fazer tanta diferença assim na eficácia do modelo. Podemos, com isso, concluir que uma boa escolha das características são um fator mais importante na eficácia do modelo.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Grafos Relacionais com Atributos}
+\label{ssec:graphs-with-attributes}
+
+Um experimento muito interessante e inspirador foi explorado por \citet{Cervantes2014}, que modelou a rede de colaboração científica através de grafos relacionais com atributos para mostrar as relações de coautoria entre pesquisadores. Foi também criado um modelo baseado em \textit{SVMs} capaz de prever novas colaborações (ligações) entre pesquisadores a partir de dados de treinamento extraídas da Plataforma Lattes. Essa base foi extraída através do \textit{scriptLattes}.
+
+O modelo proposto permitiu uma série de outras análises relevantes da estrutura dessa rede, como a identificação de pesquisadores mais importantes, ou mais colaborativos, que correspondem aos vértices com mais conexões. Também foi possível identificar comunidades dentro de diferentes áreas, formadas por componentes conexos desse grafo.
+
+Por sua flexibilidade e alto nível de expressividade, esse modelo em grafo com atributos pode ser facilmente expandido. Entretanto, o modelo de aprendizado utilizado recebe como entrada tabelas de atributos e valores. Por causa disso, é preciso transformar uma representação relacional mais expressiva (um grafo) em uma representação mais simples (uma tabela) para que o algoritmo funcione. Podemos dizer que essa ferramenta de aprendizado supervisionado utiliza representações menos expressivas.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Predição de Citações}
+\label{ssec:srl}
+
+Uma aplicação do Aprendizado Estatístico Relacional foi feita por \citet{Popescul2003} em um sistema de predição de citações, que nada mais é do que um modelo de predição de ligações entre documentos. Analisando informações a respeito de duas publicações, o sistema calculava a probabilidade de uma publicação citar a outra. Com isso, o sistema poderia sugerir trabalhos correlatos que pudessem ser citados por um autor durante a escrita de sua publicação.
+
+O grande problema desse modelo de aprendizado é a seleção de atributos (\textit{features}) que auxiliem na tarefa de classificação. Como o problema está modelado de forma relacional, a quantidade de atributos pode crescer indefinidamente. É preciso, portanto, encontrar uma forma inteligente de adicionar um atributo e avaliar sua relevância, através de algum tipo de verificação. No trabalho de \citet{Popescul2007} é sugerido um modelo interessante de seleção de atributos: a geração de novos atributos se dá via busca no conjunto de atributos possíveis, e sua seleção é feita através de um teste que avalia a significância estatística da inclusão desse atributo no modelo de predição. No caso desse trabalho, que foi aplicado ao mesmo problema de predição de citações, o conjunto de atributos possíveis surgiam de consultas SQL relacionadas às entidades pertencentes a um banco de dados relacional, e o algoritmo explorava esse conjunto e selecionava os atributos mais relevantes segundo sua significância estatística. O interessante desse trabalho é que o algoritmo, ao gerar os novos atributos, adicionava essas informações ao banco de dados como novas relações entre entidades, enriquecendo o modelo.
+
+Nossa proposta é parecida, pois também desejamos gerar novos atributos para essas entidades, explorando algums consultas possíveis, extraindo conhecimento e formalizando esse resultado como \textit{background knowledge}, que será usado para enriquecer o modelo de aprendizado.  A principal diferença está no uso de uma ontologia em vez de um banco de dados relacional.
+
+
+%% ------------------------------------------------------------------------- %%
+\section{Ontologias}
+\label{sec:ontologias}
+
+Uma rede social é uma estrutura relacional que podemos facilmente representar por um grafo, ou por uma ontologia, ou até como um banco de dados. E uma rede de colaboração científica possui possui uma natureza multi-relacional,
+pois uma publicação pode ter vários tipos de relacionamento diferentes, como citações, autoria, veículo de publicação, dentre outros. E um autor pode se relacionar com outro via coautoria de um artigo, participação em banca ou conferência, fazer parte do mesmo grupo de pesquisa, ou ter interesses similares, dentre inúmeras outras relações possíveis.
+
+Alguns trabalhos modelaram ontologias para tratar de problemas relacionados ao uso da Plataforma Lattes e outras redes de colaboração.
+
+
+%% ------------------------------------------------------------------------- %%
+\subsection{Plataforma Lattes}
+\label{ssec:lattes}
+
+No caso da Plataforma Lattes, \citet{Anaue2009} construíram uma ontologia capaz de responder a diversas questões de competência. O usuário consulta a base usando linguagem natural, e a ontologia consegue encontrar a informação desejada, através de inferência. A vantagem dessa metodologia é a facilidade na modelagem, nas ferramentas de inferência, e na
+expressividade da representação. \citet{Galego2013} também desenvolveu uma ontologia para esse domínio, mas seu interesse era trabalhar com Web Semântica, gerar relatórios e detectar inconsistências.
+
+
+%% ------------------------------------------------------------------------- %%
+\section{Justificativa}
+\label{sec:justificativa}
+
+
+TODO TODO TODO
