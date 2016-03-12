@@ -8,16 +8,20 @@ Alguns conceitos teóricos são importantes para o entendimento do presente proj
 \section{Aprendizado Supervisionado}
 \label{sec:fundamentos}
 
-O aprendizado supervisionado é um tipo de aprendizado de máquina em que o agente, durante a fase de treinamento, observa alguns exemplos de entradas (\textit{inputs}) e de saídas (\textit{outputs}) esperadas e aprende a classificá-las, através de uma função de transformação de entradas em saídas. Depois disso, esse agente observa uma base de testes com inúmeros exemplos e classifica esses dados de acordo com o seu modelo interno.
+O aprendizado supervisionado é um tipo de aprendizado de máquina em que o agente, durante a fase de treinamento, observa alguns exemplos de entradas (\textit{inputs}) e de saídas (\textit{outputs}) esperadas e aprende a classificá-las, através de uma função de transformação de entradas em saídas. Depois disso, esse agente observa uma base de testes com inúmeros novos exemplos e deve classificá-los de acordo com o seu modelo interno. Dizemos que um modelo é eficaz se maximiza o conjunto de observações classificadas corretamente e minimiza as observações classificadas incorretamente.
 
-
-
-Segundo \citet{AIMA}...
-
-
-%TODO Chapter 19 do AIMA fala sobre background knowledge
-
+%TODO Segundo \citet{AIMA}... ?
 %SVM...
+
+%% ------------------------------------------------------------------------- %%
+\section{Conhecimento prévio (\textit{background knowledge})}
+\label{sec:fundamentos}
+
+Conhecimento prévio, segundo \citet[capítulo 19]{AIMA}, geralmente é representado como um conjunto geral de teorias em uma lógica de primeira ordem. Essas teorias são compostas por hipóteses que devem explicar ou classificar corretamente um conjunto de observações (ou atributos). Essas observações são sentenças lógicas que descrevem algo sobre o mundo. As hipóteses devem poder ser generalizadas e  aplicáveis a novos exemplos. Outra propriedade importante é que a teoria seja consistente, ou seja, uma hipótese não pode gerar falsos positivos ou falsos negativos.
+
+Esse conhecimento prévio pode ser cumulativo: novas observações podem gerar novas hipóteses, que enriquecem o conhecimento prévio e o modelo como um todo, tornando mais eficaz a sua capacidade de predição e aumentando a generalidade de suas hipóteses.
+
+Uma das disciplinas que se concentra nesse tipo de problema de aprendizado é chamada de \textit{Inductive Logic Programming} (ILP). Problemas expressos de forma relacional podem ser tratados muito bem com algoritmos de ILP. Com o uso de conhecimento prévio, segundo \citet{AIMA}, é reduzida a complexidade do aprendizado, pois as novas hipóteses geradas devem ser consistentes com as hipóteses do conhecimento prévio, e isso reduz o conjunto de novas hipóteses possíveis que o algoritmo precisaria considerar, além de conseguir explicar parte das novas observações, através do uso das hipóteses já integradas ao conhecimento prévio.
 
 
 %% ------------------------------------------------------------------------- %%
