@@ -23,10 +23,34 @@ Esse conhecimento prévio pode ser cumulativo: novas observações podem gerar n
 
 Uma das disciplinas que se concentra nesse tipo de problema de aprendizado é chamada de \textit{Inductive Logic Programming} (ILP). Problemas expressos de forma relacional podem ser tratados muito bem com algoritmos de ILP. Com o uso de conhecimento prévio, segundo \citet{AIMA}, é reduzida a complexidade do aprendizado, pois as novas hipóteses geradas devem ser consistentes com as hipóteses do conhecimento prévio, e isso reduz o conjunto de novas hipóteses possíveis que o algoritmo precisaria considerar, além de conseguir explicar parte das novas observações, através do uso das hipóteses já integradas ao conhecimento prévio.
 
+%% ------------------------------------------------------------------------- %%
+\section{Hierarquia de Representações em Problemas de Aprendizado}
+\label{sec:fundamentos}
+
+Segundo \citet{Raedt2008}, existem várias representações que podem ser utilizadas para modelar um problema de aprendizado, algumas mais expressivas, outras menos. Ele mostra em seu trabalho que também existe uma hierarquia dessas representações em uma ordem crescente de expressividade, exibida a seguir:
+
+\begin{itemize}
+    \item \textbf{Representações Booleanas} (\textit{Boolean Learning}): cada percepção contém ítens ou proposições verdadeiras (ou \textit{presentes}) e falsas (ou \textit{não-presentes}), e desejamos encontrar uma regra que defina essas observações. Esta é a representação com o menor grau de expressividade.
+    \item \textbf{Aprendizado por tabelas de valores e atributos} (\textit{Attribute-Value Learning}): o conjunto de percepções ou experiências é apresentado como uma tabela única onde cada linha é um exemplo e cada coluna é um atributo, e desejamos que o modelo aprenda a classificar uma experiência nova ou a prever o valor de um atributo de acordo com os exemplos vistos anteriormente durante o treinamento. Esse tipo de representação é bastante utilizada e bem comum.
+    \item \textbf{Representações Multi-Instância} (\textit{Multi-Instance Representations}): muito parecida com a representação por valores e atributos, só que, neste caso, classes podem conter múltiplos exemplos, ou seja, um exemplo pode ter um atributo que depende do valor contido em outro exemplo.
+    \item \textbf{Aprendizado Relacional} (\textit{Relational Learning}): múltiplos exemplos ou relações entre exemplos e hipóteses podem aparecer, e é possível construir essa representação com múltiplas tabelas em um banco de dados. É bastante útil quando o domínio possui uma natureza relacional.
+    \item \textbf{Programas Lógicos}  (\textit{Logical Programs}): é um modelo que recebe como entrada as diversas observações (exemplos), e aprende a sintetizar um programa lógico com regras gerais (hipóteses) capazes de derivar estes exemplos e classificar outros conjuntos de observações. Existem alguns trabalhos na literatura cuja linguagem de representação foi PROLOG, e que usavam ferramentas de Programação Lógica Indutiva (\textit{Inductive Logic Programming}). Tal representação é a mais expressiva.
+\end{itemize}
+
+Apesar dessa hierarquia de expressividade, Raedt nos mostra que as representações são equivalentes em sua capacidade de representação: o que pode ser modelado por uma pode ser adaptado e transformado em outra representação de mais baixo nível, e vice-versa. Entretanto, um modelo de mais alto nível é declarativo e compacto. Quando transformado em um modelo de nível mais baixo, necessita de um número muito maior de exemplos, atributos, tabelas, colunas e outras entidades. Isso dificulta a análise e a apreciação dessas informações. Portanto, a escolha correta da representação é fundamental para o pesquisador que deseja explorar um problema, pois a expressividade da representação simplifica a análise do domínio.
+
+Raedt também conclui que todas essas representações podem ser modeladas naturalmente com lógica de predicados, que é relacional por natureza. Também dá exemplos de vários algoritmos de aprendizado utilizando programação com lógica,
+como \textit{SVMs}, \textit{k-nearest neighbor} e \textit{redes bayesianas}, que podem ser utilizados na modelagem do problema.
 
 %% ------------------------------------------------------------------------- %%
 \section{Ontologia}
 \label{sec:ontologia}
+
+Uma ontologia é uma estrutura relacional, um modelo de dados que apresenta entidades que fazem parte de algum domínio, como também as suas relações dentro desse domínio.
+
+Algumas ferramentas da Lógica são utilizadas em uma Ontologia, como a inferência lógica. Portanto, uma Ontologia é um modelo mais poderoso do que um banco de dados. Ela também permite uma representação mais expressiva do domínio, pois permite a criação de classes e a modelagem de relações entre entidades, e a descoberta de novas relações por inferência, através do uso de \textit{reasoners}, que são programas capazes de inferir conseqüências lógicas a partir de uma base de fatos ou axiomas.
+
+%TODO more...
 
 
 %% ------------------------------------------------------------------------- %%
