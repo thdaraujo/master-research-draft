@@ -46,23 +46,19 @@ como \textit{SVMs}, \textit{k-nearest neighbor} e \textit{redes bayesianas}, que
 \section{Ontologia}
 \label{sec:ontologia}
 
+Diferentemente da noção filosófica de Ontologia como o estudo da natureza do Ser, para a Ciência da Computação uma ontologia é uma estrutura relacional, um modelo de especificação formal explícita de conceitos de um determinado domínio.
+Esses conceitos podem dizer respeito a entidades, ou a relações entre entidades desse mesmo domínio.
 
-Segundo \citet{Guarino2009},
+Segundo \citet{Guarino2009}, uma ontologia é um artefato computacional que possui um modelo formal de representação da estrutura de um domínio, contendo as entidades relevantes bem como as relações que emergem da observação desse mesmo domínio, mas apenas as que são úteis para algum determinado fim. Geralmente, desejamos responder a algumas questões de competência. A modelagem de classes e relações entre entidades é feita através de definições formais em uma lógica de descrição, de forma compacta e de alto nível de abstração.
 
-Uma ontologia é uma estrutura relacional, um modelo de dados que apresenta entidades que fazem parte de algum domínio, como também as suas relações dentro desse domínio.
+Um exemplo de domínio possível é a comunidade científica, com seus diversos pesquisadores e suas relações com outros pesquisadores. Uma ontologia que representa esse domínio deve ser capaz de capturar as entidades relevantes, organizando as informações em conceitos e relações, para que seja capaz de responder a algumas perguntas, como \textit{Quem é coautor de um artigo A?}. Nesse caso, pode descrever classes de entidades como \textit{Pesquisador} e \textit{Artigo}, e relações binárias entre dois indivídios, como a relação \textit{colaborou\_com} e \textit{publicou\_artigo}.
 
-Algumas ferramentas da Lógica são utilizadas em uma Ontologia, como a inferência lógica. Portanto, uma Ontologia é um modelo mais poderoso do que um banco de dados. Ela também permite uma representação mais expressiva do domínio, pois permite a criação de classes e a modelagem de relações entre entidades, e a descoberta de novas relações por inferência, através do uso de \textit{reasoners}, que são programas capazes de inferir conseqüências lógicas a partir de uma base de fatos ou axiomas.
+O mais importante é que essa definição formal possa ser entendida por um computador em um formato padronizado, para que a resposta seja encontrada de forma automática. Para isso, uma ontologia pode utilizar a inferência lógica para responder a esse tipo de pergunta, como também descobrir novas relações entre entidades, através do uso de \textit{reasoners}, que são programas capazes de inferir conseqüências lógicas a partir de uma base de fatos contidos em uma ontologia.
 
-%TODO more...
-
-GUARINO, N.; GIARETTA, P. Ontologies and knowledge bases: Towards a terminological clarification.
-
+Por tudo isso, podemos dizer que uma ontologia é uma representação bastante expressiva e poderosa.
 
 %% ------------------------------------------------------------------------- %%
 \section{OWL}
 \label{sec:owl}
 
-
-%% ------------------------------------------------------------------------- %%
-\section{RDF}
-\label{sec:rdf}
+%TODO owl
