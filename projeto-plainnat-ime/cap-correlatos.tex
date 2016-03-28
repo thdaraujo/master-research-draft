@@ -94,5 +94,12 @@ expressividade da representação. \citet{Galego2013} também desenvolveu uma on
 \section{Justificativa}
 \label{sec:justificativa}
 
+A principal hipótese a ser testada é se o enriquecimento de um modelo de aprendizado supervisionado com conhecimento prévio extraído de uma ontologia pode aumentar a eficácia desse modelo quando aplicado ao problema de predição de ligações, aqui definido como a colaboração entre pesquisadores em uma rede de colaboração. Essa proposta será comparada com os trabalho de \citet{MohammadAlHasan} e \cite{Cervantes2014}.
 
-TODO TODO TODO
+O uso de uma ontologia é justificado por sua expressividade, algo que simplifica a criação de novas consultas que gerem novos atributos para as entidades da rede, e a possibilidade da descoberta de novas características, através do uso de inferência lógica. Também é simples encontrar e representar novos tipos de relações entre entidades, bem como organizá-las em diferentes classes. Outra vantagem secundária é a uniformização do vocabulário a respeito do domínio, e a fácil reutilização desses conceitos e desse conhecimento em outras aplicações que pertençam a domínios similares.
+
+Além disso, os resultados do modelo de predicão podem ser aproveitados posteriormente para expandir a própria ontologia inicial. As predições resultantes do modelo podem ser adicionadas à ontologia como novas relações entre pesquisadores. E isto pode gerar novos atributos úteis e novos tipos de classificação que podem ser extraídos novamente, e podem gerar um conhecimento prévio ainda mais rico.
+
+Escolhemos aplicar esse modelo à Plataforma Lattes por ser um domínio bem conhecido, e por termos disponível uma base de currículos bastante extensa, da ordem de 4 milhões de currículos.
+
+Quanto ao modelo de aprendizado, serão utilizados os mesmos que estão presentes na literatura para que se faça uma justa comparação.
