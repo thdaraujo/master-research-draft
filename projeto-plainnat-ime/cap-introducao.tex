@@ -2,93 +2,92 @@
 \chapter{Introdução}
 \label{cap:introducao}
 
-A internet não é apenas um repositório quase infinito de informações aleatórias em páginas da web. Em uma análise mais apurada, ela passa a ilustrar imensas cadeias de significados. Com o surgimento da área de Mineração de Dados, esse imenso conjunto de dados começou a ser analisado e utilizado como base para a contrução de novos conhecimentos.
+A internet não é apenas um repositório quase infinito de informações aleatórias em páginas da web. Em uma análise mais apurada, ela passa a ilustrar imensas cadeias de significados. Com o surgimento da área de Mineração de Dados esse imenso conjunto de dados passou a ser analisado de forma mais eficiente e utilizado como base para a contrução de novos conhecimentos.
 
-Por essa razão, quando falamos da quantidade maciça de informação disponível, conhecida como \textit{Big Data}, devemos pensar também que é possível extrair muito \textbf{significado} desses dados. Para \cite{Kay2014}, o que chamamos de \textit{Big Data} não é algo relevante pela sua quantidade, mas sim pelo que ele chama de \textit{Big Meaning}, isto é, toda a riqueza de significados que pode ser extraída desses dados.
+Por essa razão, quando falamos da quantidade maciça de informação disponível, conhecida como \textit{Big Data}, devemos pensar na grande quantidade de \textbf{significados} que podemos extrair desses dados. Para \cite{Kay2014}, o que chamamos de \textit{Big Data} não é algo relevante pela sua quantidade, mas sim pelo que ele chama de \textit{Big Meaning}, isto é, toda essa imensa riqueza de significados presente na web que podemos estudar.
 
 Nesse panorama, surgem novas possibilidades de extração de informação e de construção do conhecimento de forma automatizada. Através de modelos de classificação e de análise, tornou-se possível, segundo \cite{Halevy2009}, construir sistemas que entendem uma frase em determinada língua e a traduzem para outra, ou que interpretam e classificam textos, tudo isso usando como exemplo apenas os inúmeros textos contidos na web.
 
-Ainda como desdobramento dessas novas técnicas, tornou-se possível analisar as interações entre seres humanos em redes sociais, como nas redes de colaboração científica, que contêm informações de autores, publicações e seus temas, em diversas áreas do saber. É possível identificar comunidades interessadas em temas similares, grupos de pesquisadores, e mudanças  nos interesses dessas comunidades. Através disto, é possível saber mais a respeito do dia-a-dia da produção científica, e do desenvolvimento da Ciência em geral ao longo do tempo.
+Ainda como desdobramento dessas novas técnicas, tornou-se possível analisar as interações entre seres humanos em redes sociais, como nas redes de colaboração científica, que contêm informações de autores, publicações e seus temas, em diversas áreas do saber. É possível identificar comunidades interessadas em temas similares, grupos de pesquisadores e mudanças nos interesses dessas comunidades. Através disto, é possível saber mais a respeito do dia-a-dia da produção científica e do desenvolvimento da Ciência em geral ao longo do tempo.
 
-Com especial interesse, podemos analisar essas redes de colaboração, que formam um subconjunto da comunidade científica, e avaliar o desenvolvimento da Ciência em todo o mundo, descobrindo quais são as principais contribuições e tendências, como se dá o relacionamento entre pesquisadores, e qual a importância e influência de grupos de pesquisa em suas comunidades. Esse tipo de análise é interessante também em levantamentos sobre produtividade, impacto de uma pesquisa, relevância e popularidade de um projeto ou uma área, como formas de se mensurar e quantificar o progresso científico.
+Com especial interesse, podemos analisar essas redes de colaboração, que formam um subconjunto da comunidade científica e avaliar o desenvolvimento da Ciência em todo o mundo, descobrindo quais são as principais contribuições e tendências, como se dá o relacionamento entre pesquisadores e qual a importância e influência de grupos de pesquisa em suas comunidades. Esse tipo de análise é interessante em levantamentos sobre produtividade e impacto de uma pesquisa, relevância e popularidade de um projeto ou uma área, como formas de se mensurar e quantificar o progresso científico, entre outros aspectos.
 
-Várias técnicas de análise podem ser empregadas nesse problema, desde as mais simples, como relatórios de produtividade, até as mais complexas, como os agrupamentos de pesquisadores em categorias específicas ou a classificação de trabalhos de forma automática. Na literatura, encontramos algumas ferramentas muito úteis para essa análise. Uma delas trata do problema da predição de ligações entre pessoas, que permite prever, com boa segurança, novas colaborações entre pesquisadores, através da verificação de suas características e dos seus trabalhos publicados.
+Várias técnicas de análise podem ser empregadas nesse problema, desde as mais simples, como relatórios de produtividade, até as mais complexas, como o agrupamento de pesquisadores em categorias específicas ou a classificação de trabalhos de forma automática. Na literatura, encontramos algumas ferramentas muito úteis para essa análise. Uma delas trata do problema da predição de ligações entre pesquisadores, que permite prever, com boa segurança, novas colaborações, através da verificação das características de trabalhos publicados, interesses de pesquisa, e outras particularidades.
 
-Como é usual no método científico, encontramos algumas limitações nessas ferramentas, geralmente derivadas de métodos da área de Aprendizado de Máquina. Algumas também não levam em consideração características dos pesquisadores, mas apenas da estrutura da rede. Existem representações mais expressivas que poderiam ser aplicadas ao domínio com facilidade, e várias técnicas relacionadas à área de Sistemas Baseados em Conhecimento que simplificariam essa tarefa, e aumentariam sua eficácia.
+Como é usual no método científico, encontramos algumas limitações nessas técnicas, geralmente derivadas de métodos da área de Aprendizado de Máquina. Algumas também não levam em consideração características dos pesquisadores, mas apenas da estrutura da rede. Existem representações mais expressivas que poderiam ser aplicadas ao domínio com facilidade, e várias técnicas relacionadas à área de Sistemas Baseados em Conhecimento que possibilitariam simplificar essa tarefa e aumentar sua eficácia.
 
 %TODO falar em como seria melhor usar SBC?
 %Está meio fraco...
 %citar algo do minsky talvez
 
-Com o presente trabalho, esperamos contribuir para esse tipo de análise, aplicando técnicas de Sistemas Baseados em Conhecimento, e comparando o resultado com outros trabalhos, para demonstrar a eficácia das técnicas propostas.
+Com o presente trabalho, esperamos contribuir para esse tipo de análise, aplicando ideias vindas da área de Sistemas Baseados em Conhecimento, e comparando o resultado com outros trabalhos, afim de analisar a possível eficácia das técnicas propostas.
 
 %% ------------------------------------------------------------------------- %%
 \section{Motivação}
 \label{sec:motivacao}
 
-Uma rede social é uma estrutura relacional que podemos facilmente representar por um grafo com atributos (\citet{Cervantes2014}), ou por uma ontologia (\citet{Anaue2009}), ou até mesmo como um banco de dados. Uma rede de colaboração científica possui uma natureza multi-relacional, pois uma publicação pode ter vários tipos de relacionamento diferentes, como citações, autoria, veículo de publicação, dentre outros. E um autor pode se relacionar com outro via coautoria de um artigo, participação em banca ou conferência, fazendo parte do mesmo grupo de pesquisa, ou tendo interesses similares, dentre inúmeras outras relações possíveis. Todos esses atributos podem contribuir na análise da estrutura dessa rede.
+Uma rede de colaboração científica, como outras redes sociais, é uma estrutura relacional que podemos facilmente representar por um grafo com atributos, como fez \citet{Cervantes2014}, ou por uma ontologia, como a desenvolvida por \citet{Anaue2009}, ou até mesmo por um banco de dados relacional. Também possui uma natureza multi-relacional, pois uma publicação pode ter vários tipos de relacionamento diferentes, como citações, autoria, veículo de publicação, dentre outros. E um autor pode se relacionar com outro via coautoria de um artigo, participação na mesma banca ou conferência, fazendo parte do mesmo grupo de pesquisa, ou tendo interesses similares, dentre inúmeras outras relações possíveis. Todos esses atributos podem contribuir na análise da estrutura desse tipo de rede.
 
-Entretanto, se desejamos aplicar um modelo de aprendizado para analisar alguma característica da rede, geralmente utilizamos modelos que recebem como entrada tabelas de atributos e valores. Por causa disso, é preciso transformar uma representação relacional mais rica (como um grafo) em uma representação mais simples (como uma tabela). Portanto, podemos dizer que uma ferramenta de aprendizado supervisionado desse tipo utiliza representações pouco expressivas. Segundo \citet{Raedt2008}, existem várias representações que podem ser utilizadas para modelar um problema de aprendizado, algumas mais expressivas, outras menos. Ele mostra em seu trabalho que existe uma hierarquia dessas representações em uma ordem crescente de expressividade.
+Entretanto, se desejamos aplicar um modelo de aprendizado para analisar alguma característica da rede, geralmente utilizamos modelos que recebem como entrada tabelas de atributos e valores. Partindo dessa abordagem, faz-se necessário transformar uma representação relacional mais rica (como um grafo) em uma representação mais simples (como uma tabela), que nos leva a dizer que uma ferramenta de aprendizado supervisionado desse tipo trabalha apenas com representações pouco expressivas. Podemos chamar isso de um "problema de expressividade."
 
-Além da análise da estrutura da rede, podemos investigar outras características, como o perfil de um pesquisador, seu currículo, sua experiência, e quem são seus pares. Ou a área de pesquisa onde estão inseridas as suas publicações mais importantes. E não é nada fácil representar esse tipo de informação em tabelas de atributos e valores.
+Segundo \citet{Raedt2008}, existem várias representações possíveis na modelagem de um problema de aprendizado, algumas mais expressivas, outras menos. Ele mostra em seu trabalho que existe uma hierarquia dessas representações em uma ordem crescente de expressividade. Discutimos essa ideia no capítulo sobre trabalhos correlatos.
 
-A principal motivação do trabalho é a possibilidade de se utilizar conhecimento prévio do domínio, também chamado de \textit{background-knowledge}. A proposta é construir uma ontologia que representa a rede de colaboração, capaz de inferir novas relações, regras, e derivar novas características das entidades pertencentes ao domínio. Assim, é possível extrair esse conhecimento (\textit{background-knowledge}) e transformá-lo em novos atributos da rede de colaboração, enriquecendo os dados a serem explorados pelo modelo de predição. Esperamos, com isso, aumentar a eficiência do modelo.
+Além da análise da estrutura da rede, podemos investigar outras características, como o perfil de um pesquisador, seu currículo, sua experiência e quem são seus pares, ou a área de pesquisa em que estão inseridas as suas publicações mais importantes. Porém, não é nada trivial transformar esse conhecimento em um conjunto de tabelas de atributos e valores.
 
- A principal vantagem do uso de uma ontologia é que o conhecimento extraído é declarativo, compacto e de alto-nível, o que simplifica a sua análise e validação. Sem contar que esse conhecimento a respeito de uma entidade do domínio pode se espalhar para outras, e gerar novos atributos.
- %TODO explicar melhor isso, dar um exemplo.
+A principal motivação deste trabalho é a possibilidade de se utilizar conhecimento prévio do domínio, também chamado de \textit{background-knowledge}. A proposta é construir uma ontologia que representa o conhecimento acerca de uma rede de colaboração, sendo capaz de inferir novas relações, regras e derivar novas características das entidades pertencentes ao domínio. Assim, é possível extrair esse conhecimento (\textit{background-knowledge}) e transformá-lo em novos atributos das entidades presentes na rede, enriquecendo os dados a serem explorados pelo modelo de predição.
 
+A principal vantagem do uso de uma ontologia é que o conhecimento extraído é declarativo, compacto e de alto-nível, o que simplifica a sua validação e apreciação. Sem contar que esse conhecimento a respeito de uma entidade do domínio pode se espalhar para outras entidades, gerando outros novos atributos. Esperamos, com isso, melhorar a eficácia do modelo.
 
 %% ------------------------------------------------------------------------- %%
 \section{Objetivos}
 \label{sec:objetivos}
 
-O objetivo do presente trabalho é demonstrar que um modelo de predição de ligações em uma rede de colaboração científica, quando enriquecido com conhecimento prévio (\textit{background knowledge}) extraído de uma ontologia, se torna mais eficaz em sua tarefa de predição.
+O objetivo do presente trabalho é demonstrar que um modelo de predição de ligações em uma rede de colaboração científica, quando enriquecido com conhecimento prévio (\textit{background knowledge}) extraído de uma ontologia, torna-se mais eficaz em sua tarefa de predição.
 Para isso, espera-se cumprir os seguintes passos:
 
 \begin{itemize}
-    \item Modelar uma Ontologia para representar o conhecimento a respeito de uma rede de colaboração científica, contendo informações sobre pesquisadores, publicações e colaborações, e instituições.
-    \item Construir consultas em SPARQL, que utilizam regras de inferência na Ontologia, que serão utilizadas como conhecimento prévio. Algumas dessas consultas são:
+    \item Modelar uma Ontologia para representar o conhecimento a respeito de uma rede de colaboração científica, contendo informações sobre pesquisadores, publicações, colaborações e instituições.
+    \item Construir consultas em SPARQL na ontologia, as quais serão utilizadas como conhecimento prévio. Algumas dessas consultas são:
     \begin{itemize}
         \item Qual a área de pesquisa de um pesquisador?
         \item Quem são os pesquisadores que  ele orientou?
         \item Há quantos anos um dado pesquisador trabalha em uma instituição?
     \end{itemize}
     \item Construir um modelo de predição de ligações baseado no trabalho de \citet{Cervantes2014}.
-    \item Enriquecer o modelo de predição com o conhecimento prévio extraído da ontologia, e comparar a eficácia dos dois modelos.
-    \item Propor novas consultas à ontologia que possam ser utilizadas como conhecimento prévio aplicado ao modelo, e fazer novos testes.
+    \item Enriquecer o modelo de predição com o conhecimento prévio extraído da ontologia, executá-lo, e comparar sua eficácia com o modelo básico.
+    \item Propor novas consultas à ontologia que possam ser utilizadas como conhecimento prévio aplicado ao modelo e fazer novos testes.
 \end{itemize}
 
 %% ------------------------------------------------------------------------- %%
 \section{Metodologia}
 \label{sec:metodologia}
 
-Os objetivos traçados serão alcançados através da execução dos seguintes ítens:
+Os objetivos traçados serão alcançados através da execução dos seguintes itens:
 
 \begin{enumerate}
     \item \textbf{Estudo dos resultados de \citet{Cervantes2014}}: \\
-      O objetivo desse ítem é entender o modelo de representação das redes de colaboração como grafos com atributos e o modelo de predição utilizando aprendizado supervisionado para que possa ser implementado e enriquecido.
+      O objetivo desse item é entender o modelo de representação das redes de colaboração como grafos com atributos e o modelo de predição utilizando aprendizado supervisionado para que possa ser implementado e enriquecido.
     \item \textbf{Estudo sobre modelagem de Ontologias e Consultas via SPARQL}: \\
-      O objetivo desse ítem é encontrar uma forma de representação do conhecimento a respeito da rede de colaboração que seja útil e possa ser extraído e reutilizado.
+      Pretendemos encontrar uma forma de representação do conhecimento a respeito da rede de colaboração que seja útil e possa ser extraído e reutilizado.
     \item \textbf{Propor uma forma de extração de conhecimento prévio da ontologia}: \\
-      O objetivo desse ítem é propor um método de extração das informações obtidas via consulta da ontologia, construção de uma base de conhecimento prévio, e utilização desse conhecimento no enriquecimento do modelo, via adição de novos atributos aos vértices da rede de colaboraçào científica .
+      Almejamos propor um método de extração das informações obtidas via consultas SPARQL na ontologia, construção de uma base de conhecimento prévio, e utilização desse conhecimento no enriquecimento do modelo, via adição de novos atributos às entidades da rede de colaboraçào científica.
     \item \textbf{Executar a ideia proposta}: \\
       Desenvolver um algoritmo que recebe como entrada um conjunto de dados sobre pesquisadores, suas publicações e seus coautores, que seja capaz de popular a ontologia e extrair dela o conhecimento prévio, enriquecer o modelo de predição, e executá-lo. %TODO falar da saída?
     \item \textbf{Realizar teste da ideia com informações da Plataforma Lattes}: \\
-      Preparar um ambiente de testes, que contenha um conjunto de dados extraídos da Plataforma Lattes através do \textit{scriptLattes} e a ontologia. Popular a ontologia, e extrair o conhecimento prévio. Rodar o modelo de predição com e sem o enriquecimento com conhecimento, e comparar os resultados. %TODO ajustar
+      Preparar um ambiente de testes, que contenha um conjunto de dados extraídos da Plataforma Lattes através do \textit{scriptLattes} e a ontologia já estruturada. Depois disso, devemos popular a ontologia e extrair daí conhecimento prévio, rodar o modelo de predição com e sem o enriquecimento e comparar os resultados.
 \end{enumerate}
 
 %% ------------------------------------------------------------------------- %%
 \section{Contribuições}
 \label{sec:contribucoes}
 
-A principal contribuição esperada deste trabalho é a construção de um modelo que utilize aprendizado supervisionado e seja capaz de receber informação (\textit{background-knowledge}) extraída de uma ontologia e de tratar o problema de predição de ligações em uma rede de colaboração científica de forma eficiente.
-O interesse de tal contribuição é a proposta de uma forma de representação mais compacta e expressiva do conhecimento prévio, algo que pode permitir uma fácil validação, expansão, generalização e reutilização desse conhecimento, e uma consequente melhoria da capacidade de predição desse modelo.
+A principal contribuição que esperamos alcançar com este trabalho é a construção de um modelo que utilize aprendizado supervisionado e seja capaz de receber informação (\textit{background-knowledge}) extraída de uma ontologia e de tratar o problema de predição de ligações em uma rede de colaboração científica de forma eficiente.
+
+O interesse desta contribuição é a proposta de uma forma de representação mais compacta e expressiva do conhecimento prévio, algo que pode permitir uma fácil validação, expansão, generalização e reutilização desse conhecimento, além de uma consequente melhoria da capacidade de predição desse modelo.
 
 %% ------------------------------------------------------------------------- %%
 \section{Organização do Trabalho}
 \label{sec:organizacao_trabalho}
 
-%TODO verificar se os numeros dos capitulos estao aparecendo...
-
-No Capítulo~\ref{cap:conceitos}, apresentamos alguns conceitos teóricos que servem para dar um melhor entendimento do trabalho. Já no Capítulo~\ref{cap:correlatos}, exploramos alguns trabalhos relacionados, algumas questões que ainda não foram exploradas em outros trabalhos, e justificamos a importância deste projeto de pesquisa.
-Finalmente, no Capítulo~\ref{cap:conclusoes}, delimitamos o escopo do projeto e discutimos algumas conclusões. O Capítulo~\ref{cap:cronograma} trata do cronograma de atividades necessárias para a execução do projeto.
+No Capítulo~\ref{cap:conceitos}, apresentamos alguns conceitos teóricos que servem para dar um melhor entendimento do trabalho. Já no ~\ref{cap:correlatos}, exploramos alguns trabalhos relacionados, algumas questões que ainda não foram exploradas por outros pesquisadores e justificamos a importância deste projeto de pesquisa.
+Finalmente, no Capítulo~\ref{cap:conclusoes}, delimitamos o escopo do projeto e discutimos algumas conclusões. O ~\ref{cap:cronograma} trata do cronograma de atividades necessárias para a execução do projeto.
