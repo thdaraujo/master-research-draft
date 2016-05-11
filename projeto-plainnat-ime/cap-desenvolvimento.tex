@@ -2,4 +2,176 @@
 \chapter{Desenvolvimento}
 \label{cap:desenvolvimento}
 
-TODO desenvolvimento
+A proposta inicial do projeto consiste em rodar um experimento em pequena escala. Extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Dados como nome, área de atuação, publicações, coautores, local de trabalho ou residência, e data em que começou a trabalhar no instituto.
+
+Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. Esse software facilita a construção, edição, e análise de ontologias.
+
+Essa ontologia tem por finalidade organizar o conhecimento a respeito de pesquisadores e sua origem acadêmica, suas publicações, e os relacionamentos entre essas entidades. Com isso, é possível acessar informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos do instituto, servindo de base para esse experimento.
+
+%TODO falar do FOAF
+
+A ontologia básica possui a seguinte estrutura (TBOX):
+
+%TODO conferir ontologia
+
+\begin{alltt}
+Verbatim extended with the ability
+to use normal commands.  Therefore, it
+is possible to \emph{emphasize} words in
+this environment, for example.
+\normalfont{oi oi oi}
+\end{alltt}
+
+\begin{alltt}
+Class: Grupo \( \equiv \) foaf:Group
+SubClassOf: Agent
+Descrição: \emph{Classe-pai de diferentes grupos de pessoas.}
+Relações:
+  membros \( \equiv \) member
+
+Class: Grupo_de_Pesquisa
+SubClassOf: Grupo
+Descrição: \emph{Agrupa diferentes grupos de pesquisa.}
+
+Class: Organização \( \equiv \) foaf:Organization
+SubClassOf: Agent
+Descrição: \emph{Define uma organização, que pode ser uma Universidade, por
+exemplo.}
+Relações:
+faz_parte \( \equiv \) sub_organizacao:
+\emph{Uma \textbf{Organização} pode fazer parte de outra \textbf{Organização},
+por exemplo: o Instituto de Física faz_parte da USP. É o inverso da
+relação \textbf{possui}.}
+possui \( \equiv \) super_organizacao:
+\emph{Uma \textbf{Organização} pode possuir outra \textbf{Organização}, por
+exemplo: A USP possui várias Faculdades.}
+
+Class: Universidade
+SubClassOf: Organização
+Descrição: \emph{Classe das Universidades e instituições
+de ensino.}
+
+Class:Instituto
+SubClassOf: Organização
+Descrição: \emph{Classe dos institutos de ensino e pesquisa.}
+
+Class: Departamento
+SubClassOf: Organização
+Descrição: \emph{Classe dos departamentos ligados à institutos de pesquisa e
+faculdades.}
+
+Class: Revista
+SubClassOf: Organização
+Descrição: Classe das revistas científicas, que publicam artigos.
+Relações:
+publicou: \emph{Uma \textbf{Revista} pode publicar um \textbf{Artigo}.
+É o inverso da relação \textbf{publicado_em}.}
+
+Class: Pessoa \( \equiv \) foaf:Person
+SubClassOf: Agent
+Descrição: \emph{Classe-pai das tipos de pessoas.}
+Relações:
+cursou: \emph{Uma \textbf{Pessoa} pode cursar algum \textbf{Curso}.}
+estudou_em: \emph{Uma \textbf{Pessoa} pode ter estudado em alguma
+\textbf{Universidade, Instituto, Faculdade}.}
+membro_de: \emph{uma \textbf{Pessoa} pode ser membro de um  \textbf{Grupo}.
+É o inverso da relação \textbf{membro}.}
+autor: \emph{Uma \textbf{Pessoa} pode ser autora de um  \textbf{Documento}.
+É o inverso da relação \textbf{tem_autores}.}
+trabalhou_em: \emph{uma \textbf{Pessoa} pode trabalhar ou ter trabalhado em uma
+\textbf{Organização}.}
+
+Class: Aluno
+SubClassOf: Pessoa
+Descrição: \emph{Classe para os indivíduos que são alunos do IME
+ou de outro instituto.}
+Relações:
+tem_orientador: \emph{Um \textbf{Aluno} pode ser orientado por um
+\textbf{Professor}.}
+
+Class: Professor
+SubClassOf: Pessoa
+Descrição: \emph{Classe dos professores.}
+Relações:
+orienta: \emph{Um \textbf{Professor} pode orientar um
+\textbf{Aluno}. É o inverso da relação \textbf{tem_orientador}.}
+tem_orientador: \emph{Um \textbf{Professor} pode ser orientado por
+um outro \textbf{Professor}, mesmo que no passado.}
+
+Class: Curso
+SubClassOf: Thing
+Descrição: \emph{Classe dos cursos de graduação e pós-graduação.}
+Relações:
+cursado_por: \emph{Um \textbf{Curso} pode ser cursado por \textbf{Pessoas}.}
+tipo_de_curso: \emph{Um \textbf{Curso} pode ser de Pós-Graduação ou Graduação.}
+oferecido_por: \emph{Pode ser oferecido por uma instituição.}
+
+Class: Graduação
+SubClassOf: Tipo de Curso
+Descrição: \emph{Classe dos cursos de graduação.}
+
+Class: Pós Graduação
+SubClassOf: Tipo de Curso
+Descrição: \emph{Classe dos cursos de pós-graduação.}
+
+Class: Documento \( \equiv \) foaf:Document
+SubClassOf: Thing
+Descrição: \emph{Classe dos documentos produzidos por alunos,
+professores e pesquisadores.}
+Relações:
+tem_autores: \emph{Um documento possui um ou mais autores do tipo
+\textbf{Pessoa}.}
+
+Class: Artigo
+SubClassOf: Documento
+Descrição: \emph{Classe dos artigos científicos publicados em
+revistas, simpósios e outros eventos.}
+Relações:
+publicado_em: \emph{Um \textbf{Artigo} pode ser publicado em
+uma \textbf{Revista} ou um \textbf{Evento}.}
+
+Class: Tese
+SubClassOf: Documento
+Descrição: \emph{Classe-pai das Teses científicas de mestrado e doutorado.}
+
+Class: Evento
+SubClassOf: Thing
+Descrição: \emph{Classe-pai dos eventos científicos.}
+Relações:
+publicou: \emph{Um \textbf{Evento} pode ter publicações de \textbf{Artigos}.}
+
+Class: Conferência
+SubClassOf: Evento
+Descrição: \emph{Classe das Conferências científicas.}
+
+Class: Simpósio
+SubClassOf: Evento
+Descrição: \emph{Classe dos simpósios.}
+
+Class: foaf:Spatial Thing
+Descricão: \emph{Classe dos indivíduos que possuem alguma
+localização geográfica. \textbf{Evento} é uma delas.}
+
+Classe: Local
+SubClassOf: Thing
+Descrição: \emph{Classe dos locais geográficos; são localizações.}
+Relações:
+localizado \( \equiv \) foaf:based near
+\emph{Relaciona \textbf{Organização} ou \textbf{Evento} com um local
+geográfico.}
+
+Class: País
+SubClassOf: Local
+
+Class: Continente
+SubClassOf: Local
+
+\end{alltt}
+
+
+
+%1. Estudar o domínio e modelar uma Ontologia.
+%2. Modelar as consultas à ontologia que servirão para enriquecer o modelo de predição.
+%3. Construir um modelo de predição de ligações baseado nos trabalhos da literatura, fazendo experimentos com diferentes técnicas de aprendizado supervisionado.
+%4. Propor e implementar um algoritmo de extração de conhecimento da ontologia e enriquecimento do modelo de predição.
+%5. Montar ambiente de testes e elaborar alguns testes de comparação.
