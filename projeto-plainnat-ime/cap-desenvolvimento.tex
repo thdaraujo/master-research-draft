@@ -162,9 +162,9 @@ A primeira questão de competência é extraída diretamente do currículo latte
 
 Já a questão a respeito dos anos de trabalho em uma dada instituição
 
-Conhecimento Prévio
+%TODO Conhecimento Prévio
 
-O conhecimento prévio será extraído da ontologia através das consultas SPARQL, e transformado em uma matriz de relações, da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia, e $R$ o conjunto de relações possíveis entre dois pesquisadores.  Cada linha dessa tabela resultante corresponde à um elemento do conjunto $P \times P$, e cada coluna indica as diversas possíveis relações entre um par de pesquisadores, assumindo o valor $1$ se a relação existir, e $0$ se não existir.
+O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL, e estruturado em uma matriz de relações, da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia, e $R$ o conjunto de relações possíveis entre dois pesquisadores.  Cada linha dessa tabela resultante corresponde à um elemento do conjunto $P \times P$, e cada coluna indica as diversas possíveis relações entre um par de pesquisadores, assumindo o valor $1$ se a relação existir, e $0$ se não existir.
 
 Como exemplo, seja $P = \{ p_1, p_2, p_3 \}$, o conjunto de relações $R = \{ orienta, coautor \}$, e sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. A matriz resultante será:
 
@@ -184,6 +184,50 @@ Como exemplo, seja $P = \{ p_1, p_2, p_3 \}$, o conjunto de relações $R = \{ o
     \caption{Matriz de relacionamentos entre pesquisadores}
     \label{matriz-relacoes}
 \end{table}
+
+Durante o treinamento do modelo de predição, o conjunto de treinamento conterá a coluna coautor, que define se esse exemplo pertence ou não à categoria "coautor". Durante os testes, o modelo deverá prever se existe ou não uma relação de coautoria a partir das outras propriedades contidas nas demais colunas, classificando cada um dos exemplos em uma classe $1$ (existe relação de coautoria), ou $-1$ (não existe relação de coautoria). A classificação será validada através da coluna coautor, e será possível medir a eficácia do método de predição.
+
+%Enriquecimento
+
+O conjunto de informações geradas através do grafo com atributos será enriquecido com as informações extraídas do conjunto $BK$. Chamamos aqui de enriquecimento a adição de novos atributos aos elementos do conjunto $P$. Cada pesquisador possui um conjunto de atributos relevantes, e esse conjunto será expandido com as informações do conjunto $BK$.
+
+%??
+
+%colocar o diagrama
+%TESTES
+
+Vamos testar inicialmente dois modelos de predição: Máquinas de Vetores de Suporte e Árvores de Decisão.
+SMVs são importantes porque...
+Árvores de decisão são...
+
+O modelo receberá como estrada um conjunto de treinamento onde cada linha corresponde a um elemento do conjunto $P \times P$, sendo cada coluna uma propriedade de um dos pesquisadores, ou uma relação entre eles extraída de $BK$.
+
+Um dos modelos será treinado com dados apenas dos pesquisadores (conjunto inicial sem o enriquecimento), e será testado, tendo sua eficácia será analisada.
+
+Outro modelo será treinado apenas com o conjunto enriquecido com as informações de $BRK$, será testado, e sua eficácia será analisada.
+
+Por fim, faremos a comparação da eficácia entre ambos os modelos, verificando se há melhoria na eficácia quando utilizamos conhecimento prévio.
+
+Também é de interesse avaliar se os atributos adicionais extraídos de $BK$ sáo relevantes. O modelo SVM é %???
+
+
+O ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspondente à estrutura da ontologia, porém sem nenhuma instância.
+
+(1)O programa será responsável por ler os currículos e popular a ontologia com esses dados.
+
+(2) Um dos módulos será responsável por construir o grafo com atributos e extrair o conjunto de dados sobre pesquisadores e o vetor de características. %pegar de cervantes
+%como? quais atributos? como é o grafo?
+
+(3) Após isso, deve rodar consultas SPARQL e extrair o conhecimento prévio $BK$.
+
+(4) Com esses arquivos gerados, o programa vai ler os dados extraídos por (2) e enriquecer o conjunto $BK$ com o vetor de características.
+
+(5) O programa deve instanciar um modelo de predição e triná-lo com as informações apenas dos vetores de características
+(6) O programa deve instanciar outro modelo de predição e treinálo com as informações enriquecidas em $BK$
+
+(7) O programa deve rodar os testes de ambos os modelos, calculando sua eficácia, e deve gerar um relatório comparando ambas as metodologias.
+
+(8) O programa deve ainda avaliar se as características contidas nos atributos de $BK$ são relevantes.
 
 
 %1. Estudar o domínio e modelar uma Ontologia.
