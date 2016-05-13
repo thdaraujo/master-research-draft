@@ -218,6 +218,14 @@ O ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspo
 (2) Um dos módulos será responsável por construir o grafo com atributos e extrair o conjunto de dados sobre pesquisadores e o vetor de características. %pegar de cervantes
 %como? quais atributos? como é o grafo?
 
+%TODO explicar diagrama
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.99\textwidth]{diagrama-menor}
+  \caption{Diagrama de execução do experimento}
+  \label{fig:diagrama-experimento}
+\end{figure}
+
 (3) Após isso, deve rodar consultas SPARQL e extrair o conhecimento prévio $BK$.
 
 (4) Com esses arquivos gerados, o programa vai ler os dados extraídos por (2) e enriquecer o conjunto $BK$ com o vetor de características.
@@ -228,6 +236,7 @@ O ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspo
 (7) O programa deve rodar os testes de ambos os modelos, calculando sua eficácia, e deve gerar um relatório comparando ambas as metodologias.
 
 (8) O programa deve ainda avaliar se as características contidas nos atributos de $BK$ são relevantes.
+
 
 
 %1. Estudar o domínio e modelar uma Ontologia.
