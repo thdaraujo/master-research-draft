@@ -4,7 +4,7 @@
 
 A proposta inicial do projeto consiste em rodar um experimento em pequena escala. Extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Dados como nome, área de atuação, publicações, coautores, local de trabalho ou residência, e data em que começou a trabalhar no instituto.
 
-Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. Esse software facilita a construção, edição, e análise de ontologias.
+Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. Esse software facilita a construção, edição, e consulta a ontologias.
 
 Essa ontologia tem por finalidade organizar o conhecimento a respeito de pesquisadores e sua origem acadêmica, suas publicações, e os relacionamentos entre essas entidades. Com isso, é possível acessar informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos do instituto, servindo de base para esse experimento.
 
@@ -164,9 +164,9 @@ Já a questão a respeito dos anos de trabalho em uma dada instituição
 
 %TODO Conhecimento Prévio
 
-O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL, e estruturado em uma matriz de relações, da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia, e $R$ o conjunto de relações possíveis entre dois pesquisadores.  Cada linha dessa tabela resultante corresponde à um elemento do conjunto $P \times P$, e cada coluna indica as diversas possíveis relações entre um par de pesquisadores, assumindo o valor $1$ se a relação existir, e $0$ se não existir.
+O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL, e estruturado em uma tabela da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia. Cada linha dessa tabela resultante corresponde à um elemento do conjunto $Q = \{ (a, b) | a \in P \text{ e } b \in P \text{ e } a \neq b \}$, e cada coluna indica algum atributo de $a$ ou $b$ extraído da ontologia ou alguma das diversas possíveis relações entre um desses pares de pesquisadores. A coluna assume o valor $1$ se a relação existir, e $0$ se não existir.
 
-Como exemplo, seja $P = \{ p_1, p_2, p_3 \}$, o conjunto de relações $R = \{ orienta, coautor \}$, e sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. A matriz resultante será:
+Como exemplo, temos $P = \{ p_1, p_2, p_3 \}$ e o conjunto de relações $R = \{ orienta, coautor \}$, e sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. A matriz resultante será:
 
 \begin{table}[h!]
     \centering
@@ -174,11 +174,11 @@ Como exemplo, seja $P = \{ p_1, p_2, p_3 \}$, o conjunto de relações $R = \{ o
      \hline
       & orienta & coautor \\
      \hline\hline
-     $p_1 p_2$ & 1 & 1  \\
+     $(p_1, p_2)$ & 1 & 1  \\
      \hline
-     $p_1 p_3$ & 0 & 1  \\
+     $(p_1, p_3)$ & 0 & 1  \\
      \hline
-     $p_2 p_3$ & 0 & 1  \\
+     $(p_2, p_3)$ & 0 & 1  \\
      \hline
     \end{tabular}
     \caption{Matriz de relacionamentos entre pesquisadores}
@@ -200,7 +200,7 @@ Vamos testar inicialmente dois modelos de predição: Máquinas de Vetores de Su
 SMVs são importantes porque...
 Árvores de decisão são...
 
-O modelo receberá como estrada um conjunto de treinamento onde cada linha corresponde a um elemento do conjunto $P \times P$, sendo cada coluna uma propriedade de um dos pesquisadores, ou uma relação entre eles extraída de $BK$.
+O modelo receberá como estrada um conjunto de treinamento onde cada linha corresponde a um elemento do conjunto $Q$, sendo cada coluna uma propriedade de um dos pesquisadores, um atributo ou uma relação extraídos de $BK$.
 
 Um dos modelos será treinado com dados apenas dos pesquisadores (conjunto inicial sem o enriquecimento), e será testado, tendo sua eficácia será analisada.
 
@@ -208,7 +208,7 @@ Outro modelo será treinado apenas com o conjunto enriquecido com as informaçõ
 
 Por fim, faremos a comparação da eficácia entre ambos os modelos, verificando se há melhoria na eficácia quando utilizamos conhecimento prévio.
 
-Também é de interesse avaliar se os atributos adicionais extraídos de $BK$ sáo relevantes. O modelo SVM é %???
+Também é de interesse avaliar se os atributos adicionais extraídos de $BK$ são relevantes. O modelo SVM é %???
 
 
 O ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspondente à estrutura da ontologia, porém sem nenhuma instância.
