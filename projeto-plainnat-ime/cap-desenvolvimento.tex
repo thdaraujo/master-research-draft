@@ -4,20 +4,19 @@
 
 A proposta inicial do projeto consiste em rodar um experimento em pequena escala. Extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Dados como nome, área de atuação, publicações, coautores, local de trabalho ou residência, e data em que começou a trabalhar no instituto.
 
-Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. Esse software facilita a construção, edição, e consulta a ontologias.
+Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. A estrutura básica da ontologia serve para organizar o conhecimento a respeito desses pesquisadores e sua origem acadêmica, suas publicações, e os relacionamentos que eles têm com outros. Com isso, podemos consultar essas informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos do instituto através de queries SPARQL. Essas queries geram um conjunto de dados que serve de base para esse experimento.
 
-Essa ontologia tem por finalidade organizar o conhecimento a respeito de pesquisadores e sua origem acadêmica, suas publicações, e os relacionamentos entre essas entidades. Com isso, é possível acessar informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos do instituto, servindo de base para esse experimento.
+Partimos da ontologia Friend of a friend (FOAF), que descreve pessoas, relações e suas atividades, por ela ter alguns conceitos, classes e termos que nos auxiliam na modelagem de uma rede sociais como as redes de colaboração científica.
 
-%TODO falar do FOAF
-
-A ontologia possui a seguinte estrutura (TBOX):
+A ontologia possui a seguinte estrutura de classes (TBOX):
 
 %TODO conferir ontologia
 
 \begin{alltt}
 Class: Grupo \( \equiv \) foaf:Group
 SubClassOf: Agent
-Descrição: \emph{Classe que é pai de diferentes outras classes que definem grupos de pessoas.}
+Descrição: \emph{Classe que é pai de diferentes outras classes que
+definem grupos de pessoas.}
 Relações:
   membros \( \equiv \) member
 
@@ -150,7 +149,7 @@ SubClassOf: Local
 
 \end{alltt}
 
-A ontologia foi populada com as informações dos currículos lattes, e algumas consultas também farão parte da definição da ontologia. Essas consultas são escritas na linguagem SPARQL. Duas consultas que nos interessam agora respondem às seguintes perguntas:
+A ontologia foi populada com as informações dos currículos lattes, e algumas consultas também fazem parte da definição da ontologia. Essas consultas foram feitas em SPARQL. As consultas que nos interessam agora respondem às seguintes questões:
 
 \begin{itemize}
     \item Qual a área de pesquisa de um pesquisador?
@@ -158,9 +157,12 @@ A ontologia foi populada com as informações dos currículos lattes, e algumas 
     \item Há quantos anos um dado pesquisador trabalha em uma instituição?
 \end{itemize}
 
-A primeira questão de competência é extraída diretamente do currículo lattes. A segunda questão pode ser respondida através da relação \textit{orienta} das instâncias da classe \textit{Professor}. Um professor terá uma lista de orientandos, que também são pesquisadores.
+A primeira questão de competência é extraída diretamente do currículo lattes, quando possível. A segunda questão pode ser respondida através da relação \textit{orienta} das instâncias da classe \textit{Professor}. Um professor terá uma lista de orientandos, que também são pesquisadores.
 
-Já a questão a respeito dos anos de trabalho em uma dada instituição
+%TODO ???
+%Já a questão a respeito dos anos de trabalho em uma dada instituição é extraída da data em que
+
+%e cervantes??
 
 %TODO Conhecimento Prévio
 
