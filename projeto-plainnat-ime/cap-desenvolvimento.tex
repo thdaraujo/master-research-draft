@@ -120,7 +120,7 @@ Relações:
   publicado_em: \emph{Uma \textbf{Publicação} pode ser publicada em
   uma \textbf{Revista} ou um \textbf{Evento}.}
 
-Class: Tese
+Class: Teseg
 SubClassOf: Documento
 Descrição: \emph{Classe-pai das Teses científicas de doutorado e
 dissertações de mestrado.}
@@ -162,10 +162,17 @@ A ontologia foi populada com as informações dos currículos lattes escolhidos,
 \begin{itemize}
     \item Qual a área de pesquisa de um pesquisador?
     \item Quem são os pesquisadores que ele orientou?
-    \item Há quantos anos um dado pesquisador trabalha em uma instituição?
+    \item Há quantos anos esse pesquisador trabalha em uma instituição?
+    \item Quem são as pessoas que colaboraram, como coautores, em sua produção científica?
 \end{itemize}
 
-A primeira questão de competência é extraída diretamente do currículo lattes, quando possível. A segunda questão pode ser respondida através da relação \textit{orienta} das instâncias da classe \textit{Professor}. Um professor terá uma lista de orientandos, que também são pesquisadores.
+A primeira questão de competência é extraída diretamente do currículo lattes, quando possível. Trata-se da definição de suas áreas de atuação.
+
+A segunda questão pode ser respondida através da relação \textit{orienta} das instâncias da classe \textit{Professor}. Um professor terá uma lista de orientandos, que também são pesquisadores. A origem dessa informação é a seção de orientações do currículo Lattes.
+
+A terceira questão pode ser respondida através da análise da atuação profissional em instituições de ensino, pois ela contém o ano de início, informação extraída diretamente do Lattes.
+
+Por fim, a última questão é obtida fazendo-se uma consulta aos artigos publicados pelo pesquisador, aos trabalhos em eventos e demais tipos de produção técnica e outras informações bibliográficas que listam os nomes de outros colaboradores. O grande desafio nesse caso é fazer a desambiguação de nomes.
 
 %% ------------------------------------------------------------------------- %%
 \section{Predição de Ligações}
