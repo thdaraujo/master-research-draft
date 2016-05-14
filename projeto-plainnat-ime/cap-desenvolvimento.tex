@@ -5,30 +5,23 @@
 Neste capítulo, apresentamos o desenvolvimento do projeto e as principais práticas que o norteiam, através da discussão de um experimento exploratório em pequena escala (com uma quantidade pequena de dados) que servirá como estrutura inicial do projeto.
 
 %% ------------------------------------------------------------------------- %%
-\section{Estudo do domínio e construção de uma ontologia a respeito de uma Rede de Colaboração Científica}
+\section{Estudo do domínio e construção de uma ontologia a respeito da Rede de Colaboração Científica}
 \label{sec:desenvolvimento-ontologia}
 
-A proposta consiste em rodar um experimento em pequena escala. Extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Dados como nome, área de atuação, publicações, coautores, local de trabalho ou residência, e a data em que começou a trabalhar no instituto.
+A proposta consiste em rodar um experimento em pequena escala. Extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Dados como nome, área de atuação, publicações e coautores, e local de trabalho ou residência.
 
-Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. A estrutura básica da ontologia serve para organizar o conhecimento a respeito desses pesquisadores e sua origem acadêmica, suas publicações, e os relacionamentos que eles têm com outros. Com isso, podemos consultar essas informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos do instituto através de queries SPARQL. Essas queries geram um conjunto de dados que serve de base para esse experimento.
+Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. A estrutura básica da ontologia serve para organizar o conhecimento a respeito desses pesquisadores e sua origem acadêmica, suas publicações, e os relacionamentos que eles têm com outros. Com isso, podemos consultar essas informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos através de queries SPARQL. Essas queries geram um conjunto de dados que serve de base para o experimento.
 
-Partimos da ontologia Friend of a friend (FOAF), que descreve pessoas, relações e suas atividades, por ela ter alguns conceitos, classes e termos que nos auxiliam na modelagem de uma rede sociais como as redes de colaboração científica.
+Partimos da ontologia Friend of a friend (FOAF), que descreve pessoas, relações e suas atividades, por ela ter alguns conceitos, classes e termos que nos auxiliam na modelagem da rede de colaboração científica.
 
 A ontologia possui a seguinte estrutura de classes (TBOX):
-
-%TODO conferir ontologia
 
 \begin{alltt}
 Class: Grupo \( \equiv \) foaf:Group
 SubClassOf: Agent
-Descrição: \emph{Classe que é pai de diferentes outras classes que
-definem grupos de pessoas.}
+Descrição: \emph{Classe que define grupos de pessoas.}
 Relações:
   membros \( \equiv \) member
-
-Class: Grupo_de_Pesquisa
-SubClassOf: Grupo
-Descrição: \emph{Classe dos grupos de pesquisa científica.}
 
 Class: Organização \( \equiv \) foaf:Organization
 SubClassOf: Agent
@@ -40,7 +33,7 @@ pode fazer parte de outra \textbf{Organização}, por exemplo: o
 Instituto de Física faz parte da USP.}
   possui \( \equiv \) super_organizacao: \emph{Uma \textbf{Organização} pode
 possuir outra \textbf{Organização}, por exemplo: A USP possui o
-Instituto de Matemática e Estatística.}
+Instituto de Física.}
 
 Class: Universidade
 SubClassOf: Organização
@@ -60,8 +53,8 @@ Class: Revista
 SubClassOf: Organização
 Descrição: \emph{Classe das revistas científicas que publicam artigos.}
 Relações:
-  publicou: \emph{Uma \textbf{Revista} pode publicar um \textbf{Artigo}.
-É o inverso da relação \textbf{publicado_em}.}
+  publicou: \emph{Uma \textbf{Revista} pode publicar um \textbf{Artigo}. É o
+  inverso da relação \textbf{publicado_em}.}
 
 Class: Pessoa \( \equiv \) foaf:Person
 SubClassOf: Agent
@@ -71,27 +64,27 @@ Relações:
   estudou_em: \emph{Uma \textbf{Pessoa} pode ter estudado em alguma
 \textbf{Universidade, Instituto, Faculdade}.}
   membro_de: \emph{uma \textbf{Pessoa} pode ser membro de um  \textbf{Grupo}.
-É o inverso da relação \textbf{membro}.}
+  É o inverso da relação \textbf{membro}.}
   autor: \emph{Uma \textbf{Pessoa} pode ser autora de um  \textbf{Documento}.
-É o inverso da relação \textbf{tem_autores}.}
+  É o inverso da relação \textbf{tem_autores}.}
   trabalhou_em: \emph{uma \textbf{Pessoa} pode trabalhar ou ter trabalhado
-em uma \textbf{Organização}.}
+  em uma \textbf{Organização}.}
 
 Class: Aluno
 SubClassOf: Pessoa
 Descrição: \emph{Classe dos indivíduos que são alunos de algum curso.}
 Relações:
   tem_orientador: \emph{Um \textbf{Aluno} pode ser orientado por um
-\textbf{Professor} ou outro pesquisador.}
+  \textbf{Professor} ou outro pesquisador.}
 
 Class: Professor
 SubClassOf: Pessoa
 Descrição: \emph{Classe dos professores.}
 Relações:
   orienta: \emph{Um \textbf{Professor} pode orientar um
-\textbf{Aluno}. É o inverso da relação \textbf{tem_orientador}.}
+  \textbf{Aluno}. É o inverso da relação \textbf{tem_orientador}.}
   tem_orientador: \emph{Um \textbf{Professor} pode ser orientado por
-um outro \textbf{Professor}, mesmo que no passado.}
+  um outro \textbf{Professor}, mesmo que no passado.}
 
 Class: Curso
 SubClassOf: Thing
@@ -99,7 +92,7 @@ Descrição: \emph{Classe dos cursos de graduação e pós-graduação.}
 Relações:
   cursado_por: \emph{Um \textbf{Curso} pode ser cursado por \textbf{Pessoas}.}
   tipo_de_curso: \emph{Um \textbf{Curso} pode ser de Pós-Graduação ou
-Graduação.}
+  Graduação.}
   oferecido_por: \emph{Pode ser oferecido por uma instituição.}
 
 Class: Graduação
@@ -113,22 +106,24 @@ Descrição: \emph{Classe dos cursos de pós-graduação.}
 Class: Documento \( \equiv \) foaf:Document
 SubClassOf: Thing
 Descrição: \emph{Classe dos documentos produzidos por alunos,
-professores e pesquisadores.}
+professores e pesquisadores, como um artigo científico.}
 Relações:
   tem_autores: \emph{Um documento possui um ou mais autores do tipo
-\textbf{Pessoa}. Essa propriedade é importante pois indica uma relação de \textbf{coautoria}.}
+  \textbf{Pessoa}. Essa propriedade é importante pois indica uma relação de
+  \textbf{coautoria} entre dois pesquisadores.}
 
 Class: Publicacao
 SubClassOf: Documento
 Descrição: \emph{Classe dos artigos científicos e outras publicações de
 revistas, simpósios e outros eventos.}
 Relações:
-  publicado_em: \emph{Um \textbf{Publicacao} pode ser publicado em
-uma \textbf{Revista} ou um \textbf{Evento}.}
+  publicado_em: \emph{Uma \textbf{Publicação} pode ser publicada em
+  uma \textbf{Revista} ou um \textbf{Evento}.}
 
 Class: Tese
 SubClassOf: Documento
-Descrição: \emph{Classe-pai das Teses científicas de doutorado e dissertações de mestrado.}
+Descrição: \emph{Classe-pai das Teses científicas de doutorado e
+dissertações de mestrado.}
 
 Class: Eventos
 SubClassOf: Thing
@@ -137,20 +132,23 @@ Relações:
   publicou: \emph{Um \textbf{Evento} pode ter publicações de \textbf{Artigos}.}
 
 Class: foaf:Spatial Thing
-Descricão: \emph{Classe dos indivíduos que possuem alguma
+Descricão: \emph{Classe das entidades que possuem alguma
 localização geográfica. \textbf{Evento} é uma delas.}
 
 Classe: Local
 SubClassOf: Thing
-Descrição: \emph{Classe dos locais geográficos; são localizações.}
+Descrição: \emph{Classe dos locais geográficos.}
 Relações:
-  localizado \( \equiv \) foaf:based near \emph{Relaciona \textbf{Organização} ou \textbf{Evento} com um local
-geográfico.}
+  localizado \( \equiv \) foaf:based near \emph{Relaciona \textbf{Organização}
+  ou \textbf{Evento} com um local geográfico.}
 
 Class: País
 SubClassOf: Local
 
 Class: Continente
+SubClassOf: Local
+
+Class: Cidade
 SubClassOf: Local
 
 \end{alltt}
