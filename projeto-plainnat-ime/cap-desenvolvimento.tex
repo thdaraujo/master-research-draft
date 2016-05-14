@@ -2,7 +2,13 @@
 \chapter{Desenvolvimento}
 \label{cap:desenvolvimento}
 
-A proposta inicial do projeto consiste em rodar um experimento em pequena escala. Extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Dados como nome, área de atuação, publicações, coautores, local de trabalho ou residência, e data em que começou a trabalhar no instituto.
+Neste capítulo, apresentamos o desenvolvimento do projeto e as principais práticas que o norteiam, através da discussão de um experimento exploratório em pequena escala (com uma quantidade pequena de dados) que servirá como estrutura inicial do projeto.
+
+%% ------------------------------------------------------------------------- %%
+\section{Estudo do domínio e construção de uma ontologia a respeito de uma Rede de Colaboração Científica}
+\label{sec:desenvolvimento-ontologia}
+
+A proposta consiste em rodar um experimento em pequena escala. Extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Dados como nome, área de atuação, publicações, coautores, local de trabalho ou residência, e a data em que começou a trabalhar no instituto.
 
 Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. A estrutura básica da ontologia serve para organizar o conhecimento a respeito desses pesquisadores e sua origem acadêmica, suas publicações, e os relacionamentos que eles têm com outros. Com isso, podemos consultar essas informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos do instituto através de queries SPARQL. Essas queries geram um conjunto de dados que serve de base para esse experimento.
 
@@ -149,7 +155,11 @@ SubClassOf: Local
 
 \end{alltt}
 
-A ontologia foi populada com as informações dos currículos lattes, e algumas consultas também fazem parte da definição da ontologia. Essas consultas foram feitas em SPARQL. As consultas que nos interessam agora respondem às seguintes questões:
+%% ------------------------------------------------------------------------- %%
+\section{Consultas}
+\label{sec:desenvolvimento-consultas}
+
+A ontologia foi populada com as informações dos currículos lattes escolhidos, e algumas consultas também fizeram parte da definição da ontologia. Essas consultas foram feitas na linguagem SPARQL. As consultas que nos interessam agora respondem às seguintes questões:
 
 \begin{itemize}
     \item Qual a área de pesquisa de um pesquisador?
@@ -159,10 +169,18 @@ A ontologia foi populada com as informações dos currículos lattes, e algumas 
 
 A primeira questão de competência é extraída diretamente do currículo lattes, quando possível. A segunda questão pode ser respondida através da relação \textit{orienta} das instâncias da classe \textit{Professor}. Um professor terá uma lista de orientandos, que também são pesquisadores.
 
+%% ------------------------------------------------------------------------- %%
+\section{Predição de Ligações}
+\label{sec:desenvolvimento-predicao}
+
 %TODO ???
 %Já a questão a respeito dos anos de trabalho em uma dada instituição é extraída da data em que
 
 %e cervantes??
+
+%% ------------------------------------------------------------------------- %%
+\section{Extração do Conhecimento e Construção do \textit{background-knowledge}}
+\label{sec:desenvolvimento-background-knowledge}
 
 %TODO Conhecimento Prévio
 
@@ -195,7 +213,20 @@ O conjunto de informações geradas através do grafo com atributos será enriqu
 
 %??
 
-%colocar o diagrama
+%% ------------------------------------------------------------------------- %%
+\section{Desenvolvimento e Testes}
+\label{sec:desenvolvimento-testes}
+
+A estrutura inicial do experimento segue o diagrama abaixo. Note que existem duas fases neste experimento, a fase A e a fase B, cujos passos discutimos a seguir.
+
+%TODO explicar diagrama
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.99\textwidth]{diagrama-menor}
+  \caption{Diagrama de execução do experimento}
+  \label{fig:diagrama-experimento}
+\end{figure}
+
 %TESTES
 
 Vamos testar inicialmente dois modelos de predição: Máquinas de Vetores de Suporte e Árvores de Decisão.
@@ -219,14 +250,6 @@ O ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspo
 
 (2) Um dos módulos será responsável por construir o grafo com atributos e extrair o conjunto de dados sobre pesquisadores e o vetor de características. %pegar de cervantes
 %como? quais atributos? como é o grafo?
-
-%TODO explicar diagrama
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=.99\textwidth]{diagrama-menor}
-  \caption{Diagrama de execução do experimento}
-  \label{fig:diagrama-experimento}
-\end{figure}
 
 (3) Após isso, deve rodar consultas SPARQL e extrair o conhecimento prévio $BK$.
 
