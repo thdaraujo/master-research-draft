@@ -172,7 +172,7 @@ A segunda questão pode ser respondida através da relação \textit{orienta} da
 
 A terceira questão pode ser respondida através da análise da atuação profissional em instituições de ensino, pois ela contém o ano de início, informação extraída diretamente do Lattes.
 
-Por fim, a última questão é obtida fazendo-se uma consulta aos artigos publicados pelo pesquisador, aos trabalhos em eventos e demais tipos de produção técnica e outras informações bibliográficas que listam os nomes de outros colaboradores. O grande desafio nesse caso é fazer a desambiguação de nomes.
+Por fim, a última questão é obtida fazendo-se uma consulta aos artigos publicados pelo pesquisador, aos trabalhos em eventos e demais tipos de produção técnica e outras informações bibliográficas que listam os nomes de outros colaboradores. O grande desafio nesse caso é fazer a desambiguação de pesquisadores.
 
 %% ------------------------------------------------------------------------- %%
 \section{Predição de Ligações}
@@ -189,21 +189,21 @@ Por fim, a última questão é obtida fazendo-se uma consulta aos artigos public
 
 %TODO Conhecimento Prévio
 
-O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL, e estruturado em uma tabela da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia. Cada linha dessa tabela resultante corresponde à um elemento do conjunto $Q = \{ (a, b) | a \in P \text{ e } b \in P \text{ e } a \neq b \}$, e cada coluna indica algum atributo de $a$ ou $b$ extraído da ontologia ou alguma das diversas possíveis relações entre um desses pares de pesquisadores. A coluna assume o valor $1$ se a relação existir, e $0$ se não existir.
+O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL, e estruturado em uma tabela da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia. Cada linha dessa tabela resultante corresponde à um elemento do conjunto de pares distintos de pesquisadores $Q = \{ (a, b) | a \in P \text{ e } b \in P \text{ e } a \neq b \}$, e cada coluna contém ou algum atributo de $a$ ou de $b$, ou uma relação entre $a$ e $b$. As relações entre $a$ e $b$ assumem o valor $1$ se a relação existir ou for válida, e $0$ em caso contrário.
 
-Como exemplo, temos $P = \{ p_1, p_2, p_3 \}$ e o conjunto de relações $R = \{ orienta, coautor \}$, e sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. A matriz resultante será:
+Como exemplo, admita um conjunto $P = \{ p_1, p_2, p_3 \}$ e um conjunto de relações $R = \{ orienta, coautor \}$. Sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. Também conhecemos alguns atributos desses pesquisadores: todos eles pertencem à área Ciência da Computação cujo identificador será, digamos, 123. Portanto, a matriz resultante será:
 
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|c|c|c|}
+    \begin{tabular}{|c|c|c|c|}
      \hline
-      & orienta & coautor \\
+      & área & orienta & coautor \\
      \hline\hline
-     $(p_1, p_2)$ & 1 & 1  \\
+     $Q(p_1, p_2)$ & 123 & 1 & 1  \\
      \hline
-     $(p_1, p_3)$ & 0 & 1  \\
+     $Q(p_1, p_3)$ & 123 & 0 & 1  \\
      \hline
-     $(p_2, p_3)$ & 0 & 1  \\
+     $Q(p_2, p_3)$ & 123 & 0 & 1  \\
      \hline
     \end{tabular}
     \caption{Matriz de relacionamentos entre pesquisadores}
