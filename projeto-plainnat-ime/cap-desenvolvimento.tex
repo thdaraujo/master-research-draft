@@ -178,16 +178,13 @@ Por fim, a última questão é obtida fazendo-se uma consulta aos artigos public
 \section{Predição de Ligações}
 \label{sec:desenvolvimento-predicao}
 
-%TODO ???
-%Já a questão a respeito dos anos de trabalho em uma dada instituição é extraída da data em que
+Alguns modelos de predição serão aplicados. São eles: Árvores de Decisão e  Máquinas de Vetores de Suporte (SVM). O primeiro por ser um modelo simples e ótimo para análise preliminar dos atributos relevantes que devem ser incluídos ou descartados, o que permite uma otimização do conjunto de dados. Já os SVMs são importantes pois os trabalhos relacionados utilizaram esse modelo e obtiveram bons resultados. Outra vantagem é a possibilidade do uso de seleção de atributos (\textit{feature selection}), que também permite uma otimização e simplificação do conjunto de atributos que serão considerados pelo modelo.
 
-%e cervantes??
+Uma das fases do experimento vai construir um grafo com atributos similar ao descrito por \citet{Cervantes2014}, levando em consideração as ligações entre pesquisadores, o grau de cada vértice, e outros atributos relacionados à estrutura da rede de colaboração. Esses atributos serão extraídos, gerando um conjunto de vetores de características, que chamaremos aqui de $VC$. Esse conjunto $VC$ será a entrada do modelo de predição na fase inicial do experimento. E também será enriquecido com conhecimento extraído da ontologia.
 
 %% ------------------------------------------------------------------------- %%
 \section{Extração do Conhecimento e Construção do \textit{background-knowledge}}
 \label{sec:desenvolvimento-background-knowledge}
-
-%TODO Conhecimento Prévio
 
 O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL e estruturado em uma matriz da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia. Cada linha da tabela resultante corresponde a um elemento do conjunto de pares distintos de pesquisadores $Q = \{ (a, b) | a \in P \text{ e } b \in P \text{ e } a \neq b \}$, e cada coluna recebe o valor de algum atributo de $a$, ou de $b$, ou $R(a,b)$ (uma relação entre $a$ e $b$). $R(a,b) = 1$ se a relação existir ou for válida, e $R(a,b) = -1$ em caso contrário.
 
@@ -214,17 +211,13 @@ Entretanto, essa matriz pode ter um tamanho muito grande, dependendo da quantida
 
 O modelo de predição receberá como entrada esse conjunto de dados $BK$, separado aleatoriamente em subconjuntos de treinamento e teste. Após o treinamento, durante os testes, o modelo deverá prever se existe ou não uma relação de coautoria a partir dos atributos desse par de pesquisadores fazendo a classificação de cada um dos exemplos. Esse resultado será posteriormente validado com o conjunto original, sendo possível com isso medir a eficiência do método.
 
-%Enriquecimento
-
-O conjunto de informações geradas através do grafo com atributos será enriquecido com as informações extraídas do conjunto $BK$. Chamamos aqui de enriquecimento a adição de novos atributos aos elementos do conjunto $P$. Cada pesquisador possui um conjunto de atributos relevantes, e esse conjunto será expandido com as informações do conjunto $BK$.
-
-%??
+O conjunto de informações geradas através do grafo com atributos será copiado e enriquecido com as informações extraídas do conjunto $BK$. Chamamos aqui de enriquecimento a adição de novos atributos aos elementos. Cada pesquisador possui um conjunto de atributos relevantes, e esse conjunto será expandido com as informações do conjunto $BK$.
 
 %% ------------------------------------------------------------------------- %%
 \section{Desenvolvimento e Testes}
 \label{sec:desenvolvimento-testes}
 
-A estrutura inicial do experimento segue o diagrama abaixo. Note que existem duas fases neste experimento, a fase A e a fase B, cujos passos discutimos a seguir.
+A estrutura inicial do experimento segue o diagrama abaixo. Ele está dividido em duas fases, a fase A e a fase B. A fase A vai trabalhar apenas com dados relacionados à estrutura da rede, extraídos de um grafo. Já a fase B vai trabalhar com os dados sobre a estrutura da rede mais os dados extraídos da ontologia, que chamamos de conhecimento prévio. Os passos de cada fase serão discutidos a seguir.
 
 %TODO explicar diagrama
 \begin{figure}[!h]
@@ -234,42 +227,13 @@ A estrutura inicial do experimento segue o diagrama abaixo. Note que existem dua
   \label{fig:diagrama-experimento}
 \end{figure}
 
-%TESTES
+Na fase A, um grupo pequeno de currículos lattes no formato XML será lido e processado, e serão extraídos dados gerais desses currículos. A partir desses dados, será construído um grafo com atributos, onde cada nó representa um pesquisador, e cada aresta representa alguma relação entre os participantes dessa rede. Desse grafo, será extraído um conjunto de vetores de características, que chamamos de $VC$, separado em conjuntos de treinamento e teste. O modelo de predição será treinado com o conjunto de treinamento, e será testado com o conjunto de teste. Essa fase vai gerar um relatório que lista a eficácia do modelo, pois o resultado da classificação pode ser validado com os dados iniciais.
 
-Vamos testar inicialmente dois modelos de predição: Máquinas de Vetores de Suporte e Árvores de Decisão.
-SMVs são importantes porque...
-Árvores de decisão são...
+Na fase B, o mesmo grupo de currículos será processado, e com esses dados, será populada a ontologia descrita anteriormente. Serão feitas consultas a respeito das entidades e relações presentes na ontologia, e o seu resultado será transformado em um conjunto de atributos, denominado \textit{background-knowledge}, ou $BK$, como descrito anteriormente. Os vetores de características ($VC$) da fase A serão copiados, e serão associados ao conjunto $BK$, processo que chamaremos de Enriquecimento com conhecimento prévio. Então, outro modelo de predição será instanciado, e receberá como estrada esses dados enriquecidos, também separados em conjunto de treinamento e teste. Será feito o treinamento do modelo, e o teste, e o resultado será analisado.
 
-O modelo receberá como estrada um conjunto de treinamento onde cada linha corresponde a um elemento do conjunto $Q$, sendo cada coluna uma propriedade de um dos pesquisadores, um atributo ou uma relação extraídos de $BK$.
+Por fim, será feita a comparação da eficácia de ambos os modelos, verificando se há alguma melhora no método. Também é de interesse avaliar se os atributos adicionais extraídos de $BK$ são relevantes para o modelo, através de uma análise da importância relativa de cada atributo na classificação final.
 
-Um dos modelos será treinado com dados apenas dos pesquisadores (conjunto inicial sem o enriquecimento), e será testado, tendo sua eficácia será analisada.
-
-Outro modelo será treinado apenas com o conjunto enriquecido com as informações de $BRK$, será testado, e sua eficácia será analisada.
-
-Por fim, faremos a comparação da eficácia entre ambos os modelos, verificando se há melhoria na eficácia quando utilizamos conhecimento prévio.
-
-Também é de interesse avaliar se os atributos adicionais extraídos de $BK$ são relevantes. O modelo SVM é %???
-
-
-O ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspondente à estrutura da ontologia, porém sem nenhuma instância.
-
-(1)O programa será responsável por ler os currículos e popular a ontologia com esses dados.
-
-(2) Um dos módulos será responsável por construir o grafo com atributos e extrair o conjunto de dados sobre pesquisadores e o vetor de características. %pegar de cervantes
-%como? quais atributos? como é o grafo?
-
-(3) Após isso, deve rodar consultas SPARQL e extrair o conhecimento prévio $BK$.
-
-(4) Com esses arquivos gerados, o programa vai ler os dados extraídos por (2) e enriquecer o conjunto $BK$ com o vetor de características.
-
-(5) O programa deve instanciar um modelo de predição e triná-lo com as informações apenas dos vetores de características
-(6) O programa deve instanciar outro modelo de predição e treinálo com as informações enriquecidas em $BK$
-
-(7) O programa deve rodar os testes de ambos os modelos, calculando sua eficácia, e deve gerar um relatório comparando ambas as metodologias.
-
-(8) O programa deve ainda avaliar se as características contidas nos atributos de $BK$ são relevantes.
-
-
+O ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspondente à estrutura da ontologia, porém sem nenhuma instância. O software faz o processamento (fases A e B), e gera ao final um relatório comparando ambas as estratégias.
 
 %1. Estudar o domínio e modelar uma Ontologia.
 %2. Modelar as consultas à ontologia que servirão para enriquecer o modelo de predição.
