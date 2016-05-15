@@ -189,28 +189,30 @@ Por fim, a última questão é obtida fazendo-se uma consulta aos artigos public
 
 %TODO Conhecimento Prévio
 
-O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL, e estruturado em uma tabela da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia. Cada linha dessa tabela resultante corresponde à um elemento do conjunto de pares distintos de pesquisadores $Q = \{ (a, b) | a \in P \text{ e } b \in P \text{ e } a \neq b \}$, e cada coluna contém ou algum atributo de $a$ ou de $b$, ou uma relação entre $a$ e $b$. As relações entre $a$ e $b$ assumem o valor $1$ se a relação existir ou for válida, e $0$ em caso contrário.
+O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL e estruturado em uma matriz da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia. Cada linha da tabela resultante corresponde a um elemento do conjunto de pares distintos de pesquisadores $Q = \{ (a, b) | a \in P \text{ e } b \in P \text{ e } a \neq b \}$, e cada coluna recebe o valor de algum atributo de $a$, ou de $b$, ou $R(a,b)$ (uma relação entre $a$ e $b$). $R(a,b) = 1$ se a relação existir ou for válida, e $R(a,b) = -1$ em caso contrário.
 
-Como exemplo, admita um conjunto $P = \{ p_1, p_2, p_3 \}$ e um conjunto de relações $R = \{ orienta, coautor \}$. Sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. Também conhecemos alguns atributos desses pesquisadores: todos eles pertencem à área Ciência da Computação cujo identificador será, digamos, 123. Portanto, a matriz resultante será:
+Como exemplo, admita um conjunto $P = \{ p_1, p_2, p_3 \}$ e algumas relações como $R = \{ orienta, coautor \}$. Sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. Também conhecemos alguns atributos desses pesquisadores: todos eles pertencem à área Ciência da Computação cujo identificador será, digamos, 123. Portanto, a matriz resultante será:
 
 \begin{table}[h!]
     \centering
     \begin{tabular}{|c|c|c|c|}
      \hline
-      & área & orienta & coautor \\
+      & área & orienta & coautor   \\
      \hline\hline
-     $Q(p_1, p_2)$ & 123 & 1 & 1  \\
+     $Q(p_1, p_2)$ & 123 & 1  & 1  \\
      \hline
-     $Q(p_1, p_3)$ & 123 & 0 & 1  \\
+     $Q(p_1, p_3)$ & 123 & -1 & 1  \\
      \hline
-     $Q(p_2, p_3)$ & 123 & 0 & 1  \\
+     $Q(p_2, p_3)$ & 123 & -1 & 1  \\
      \hline
     \end{tabular}
-    \caption{Matriz de relacionamentos entre pesquisadores}
+    \caption{Matriz de \textit{background-knowledge} }
     \label{matriz-relacoes}
 \end{table}
 
-Durante o treinamento do modelo de predição, o conjunto de treinamento conterá a coluna coautor, que define se esse exemplo pertence ou não à categoria "coautor". Durante os testes, o modelo deverá prever se existe ou não uma relação de coautoria a partir das outras propriedades contidas nas demais colunas, classificando cada um dos exemplos em uma classe $1$ (existe relação de coautoria), ou $-1$ (não existe relação de coautoria). A classificação será validada através da coluna coautor, e será possível medir a eficácia do método de predição.
+Entretanto, essa matriz pode ter um tamanho muito grande, dependendo da quantidade de pesquisadores. Uma solução possível seria limitar os exemplos, mostrando apenas os pares de pesquisadores que também possuem relação de coautoria. Entretanto, o impacto dessa alteração na eficácia do método ainda precisa ser investigado.
+
+O modelo de predição receberá como entrada esse conjunto de dados $BK$, separado aleatoriamente em subconjuntos de treinamento e teste. Após o treinamento, durante os testes, o modelo deverá prever se existe ou não uma relação de coautoria a partir dos atributos desse par de pesquisadores fazendo a classificação de cada um dos exemplos. Esse resultado será posteriormente validado com o conjunto original, sendo possível com isso medir a eficiência do método.
 
 %Enriquecimento
 
