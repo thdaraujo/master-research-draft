@@ -8,13 +8,13 @@ Neste capítulo, apresentamos o desenvolvimento do projeto e as principais prát
 \section{Estudo do domínio e construção de uma ontologia a respeito da Rede de Colaboração Científica}
 \label{sec:desenvolvimento-ontologia}
 
-A proposta consiste em rodar um experimento em pequena escala. Extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Dados como nome, área de atuação, publicações e coautores, e local de trabalho ou residência.
+A proposta consiste em rodar um experimento em pequena escala, de onde extraímos informações de um número pequeno de currículos Lattes, com interesse nas informações básicas dos pesquisadores do Departamento de Computação do Instituto de Matemática e Estatística da USP. Para isso, faremos uso dos seguintes dados: nome, área de atuação, publicações e coautores e local de trabalho ou residência.
 
-Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. A estrutura básica da ontologia serve para organizar o conhecimento a respeito desses pesquisadores e sua origem acadêmica, suas publicações, e os relacionamentos que eles têm com outros. Com isso, podemos consultar essas informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos através de queries SPARQL. Essas queries geram um conjunto de dados que serve de base para o experimento.
+Com base nessas informações, modelamos uma ontologia utilizando OWL através do software Protégé. A estrutura básica da ontologia serve para organizar o conhecimento a respeito desses pesquisadores e sua origem acadêmica, suas publicações e os relacionamentos que eles têm com outros. Com isso, podemos consultar essas informações estruturadas acerca da produção bibliográfica e científica dos docentes e alunos através de queries SPARQL. O conjunto de dados gerados por essas queries servirão de base para este experimento.
 
-Partimos da ontologia Friend of a friend (FOAF), que descreve pessoas, relações e suas atividades, por ela ter alguns conceitos, classes e termos que nos auxiliam na modelagem da rede de colaboração científica.
+A ontologia Friend of a friend (FOAF), que descreve pessoas, relações e suas atividades, foi escolhida como ponto de partida devido o fato de ela ter alguns conceitos, classes e termos que nos auxiliam na modelagem da rede de colaboração científica.
 
-A ontologia possui a seguinte estrutura de classes (TBOX):
+A ontologia criada para este experimento possui a seguinte estrutura de classes (TBOX):
 
 \begin{alltt}
 Class: Grupo \( \equiv \) foaf:Group
@@ -29,11 +29,11 @@ Descrição: \emph{Define uma organização, que pode ser uma Universidade, por
 exemplo.}
 Relações:
   faz_parte \( \equiv \) sub_organizacao: \emph{Uma \textbf{Organização}
-pode fazer parte de outra \textbf{Organização}, por exemplo: o
-Instituto de Física faz parte da USP.}
+  pode fazer parte de outra \textbf{Organização}, por exemplo: o
+  Instituto de Física faz parte da USP.}
   possui \( \equiv \) super_organizacao: \emph{Uma \textbf{Organização} pode
-possuir outra \textbf{Organização}, por exemplo: A USP possui o
-Instituto de Física.}
+  possuir outra \textbf{Organização}, por exemplo: A USP possui o
+  Instituto de Física.}
 
 Class: Universidade
 SubClassOf: Organização
@@ -62,7 +62,7 @@ Descrição: \emph{Classe-pai dos tipos de pessoa.}
 Relações:
   cursou: \emph{Uma \textbf{Pessoa} pode cursar algum \textbf{Curso}.}
   estudou_em: \emph{Uma \textbf{Pessoa} pode ter estudado em alguma
-\textbf{Universidade, Instituto, Faculdade}.}
+  \textbf{Universidade, Instituto, Faculdade}.}
   membro_de: \emph{uma \textbf{Pessoa} pode ser membro de um  \textbf{Grupo}.
   É o inverso da relação \textbf{membro}.}
   autor: \emph{Uma \textbf{Pessoa} pode ser autora de um  \textbf{Documento}.
@@ -120,7 +120,7 @@ Relações:
   publicado_em: \emph{Uma \textbf{Publicação} pode ser publicada em
   uma \textbf{Revista} ou um \textbf{Evento}.}
 
-Class: Teseg
+Class: Tese
 SubClassOf: Documento
 Descrição: \emph{Classe-pai das Teses científicas de doutorado e
 dissertações de mestrado.}
@@ -132,7 +132,7 @@ Relações:
   publicou: \emph{Um \textbf{Evento} pode ter publicações de \textbf{Artigos}.}
 
 Class: foaf:Spatial Thing
-Descricão: \emph{Classe das entidades que possuem alguma
+Descrição: \emph{Classe das entidades que possuem alguma
 localização geográfica. \textbf{Evento} é uma delas.}
 
 Classe: Local
@@ -157,7 +157,7 @@ SubClassOf: Local
 \section{Consultas}
 \label{sec:desenvolvimento-consultas}
 
-A ontologia foi populada com as informações dos currículos lattes escolhidos, e algumas consultas também fizeram parte da definição da ontologia. Essas consultas foram feitas na linguagem SPARQL. As consultas que nos interessam agora respondem às seguintes questões:
+A ontologia foi populada com as informações de currículos lattes escolhidos, além de algumas consultas que também fizeram parte da definição da ontologia, sendo estas últimas feitas na linguagem SPARQL. As consultas que nos interessam agora respondem às seguintes questões:
 
 \begin{itemize}
     \item Qual a área de pesquisa de um pesquisador?
@@ -168,19 +168,17 @@ A ontologia foi populada com as informações dos currículos lattes escolhidos,
 
 A primeira questão de competência é extraída diretamente do currículo lattes, quando possível. Trata-se da definição de suas áreas de atuação.
 
-A segunda questão pode ser respondida através da relação \textit{orienta} das instâncias da classe \textit{Professor}. Um professor terá uma lista de orientandos, que também são pesquisadores. A origem dessa informação é a seção de orientações do currículo Lattes.
+A segunda questão pode ser respondida através da relação \textit{orienta} das instâncias da classe \textit{Professor}. Um professor terá uma lista de orientandos, que, por sua vez, também são pesquisadores. A origem dessas informações é a seção de orientações do currículo Lattes. A terceira pode ser respondida através da análise da atuação profissional em instituições de ensino, pois ela contém o ano de início de atuação.
 
-A terceira questão pode ser respondida através da análise da atuação profissional em instituições de ensino, pois ela contém o ano de início, informação extraída diretamente do Lattes.
-
-Por fim, a última questão é obtida fazendo-se uma consulta aos artigos publicados pelo pesquisador, aos trabalhos em eventos e demais tipos de produção técnica e outras informações bibliográficas que listam os nomes de outros colaboradores. O grande desafio nesse caso é fazer a desambiguação de pesquisadores.
+Por fim, a última questão é obtida fazendo-se uma consulta aos artigos publicados pelo pesquisador, aos trabalhos em eventos e aos demais tipos de produção técnica e outras informações bibliográficas que listam os nomes de outros colaboradores. O grande desafio nesse caso é fazer a desambiguação de nomes.
 
 %% ------------------------------------------------------------------------- %%
 \section{Predição de Ligações}
 \label{sec:desenvolvimento-predicao}
 
-Alguns modelos de predição serão aplicados. São eles: Árvores de Decisão e  Máquinas de Vetores de Suporte (SVM). O primeiro por ser um modelo simples e ótimo para análise preliminar dos atributos relevantes que devem ser incluídos ou descartados, o que permite uma otimização do conjunto de dados. Já os SVMs são importantes pois os trabalhos relacionados utilizaram esse modelo e obtiveram bons resultados. Outra vantagem é a possibilidade do uso de seleção de atributos (\textit{feature selection}), que também permite uma otimização e simplificação do conjunto de atributos que serão considerados pelo modelo.
+Aplicaremos alguns modelos de predição, por exemplo, Árvores de Decisão e  Máquinas de Vetores de Suporte (SVM). O primeiro, por ser um modelo simples e ótimo para análise preliminar dos atributos relevantes que devem ser incluídos ou descartados, o que permite uma otimização do conjunto de atributos. Já os SVMs são importantes para nosso experimento, pois os trabalhos relacionados utilizaram esse modelo e obtiveram bons resultados. Outra vantagem é a possibilidade do uso de seleção de atributos (\textit{feature selection}), que também permite uma otimização e simplificação do conjunto de atributos que serão considerados pelo modelo.
 
-Uma das fases do experimento vai construir um grafo com atributos similar ao descrito por \citet{Cervantes2014}, levando em consideração as ligações entre pesquisadores, o grau de cada vértice, e outros atributos relacionados à estrutura da rede de colaboração. Esses atributos serão extraídos, gerando um conjunto de vetores de características, que chamaremos aqui de $VC$. Esse conjunto $VC$ será a entrada do modelo de predição na fase inicial do experimento. E também será enriquecido com conhecimento extraído da ontologia.
+Na fase A do experimento será construído um grafo com atributos similar ao descrito por \citet{Cervantes2014}, levando em consideração as ligações entre pesquisadores, o grau de cada vértice e outros atributos relacionados à estrutura da rede de colaboração. Esses atributos serão extraídos, gerando um conjunto de vetores de características, que chamaremos aqui de $VC$. Esse conjunto $VC$ será a entrada do modelo de predição na fase inicial do experimento, que também será enriquecido com conhecimento extraído da ontologia.
 
 %% ------------------------------------------------------------------------- %%
 \section{Extração do Conhecimento e Construção do \textit{background-knowledge}}
@@ -209,17 +207,16 @@ Como exemplo, admita um conjunto $P = \{ p_1, p_2, p_3 \}$ e algumas relações 
 
 Entretanto, essa matriz pode ter um tamanho muito grande, dependendo da quantidade de pesquisadores. Uma solução possível seria limitar os exemplos, mostrando apenas os pares de pesquisadores que também possuem relação de coautoria. Entretanto, o impacto dessa alteração na eficácia do método ainda precisa ser investigado.
 
-O modelo de predição receberá como entrada esse conjunto de dados $BK$, separado aleatoriamente em subconjuntos de treinamento e teste. Após o treinamento, durante os testes, o modelo deverá prever se existe ou não uma relação de coautoria a partir dos atributos desse par de pesquisadores fazendo a classificação de cada um dos exemplos. Esse resultado será posteriormente validado com o conjunto original, sendo possível com isso medir a eficiência do método.
+O modelo de predição receberá como entrada esse conjunto de dados $BK$, separado aleatoriamente em subconjuntos de treinamento e teste. Após o treinamento, durante os testes, o modelo deverá prever se existe ou não uma relação de coautoria a partir dos atributos desse par de pesquisadores através da classificação de cada um dos exemplos. Esse resultado será posteriormente validado com o conjunto original, sendo possível com isso medir a eficiência do método.
 
-O conjunto de informações geradas através do grafo com atributos será copiado e enriquecido com as informações extraídas do conjunto $BK$. Chamamos aqui de enriquecimento a adição de novos atributos aos elementos. Cada pesquisador possui um conjunto de atributos relevantes, e esse conjunto será expandido com as informações do conjunto $BK$.
+O conjunto de vetores de características $VC$, gerado na fase A, será copiado na fase B e enriquecido com as informações extraídas do conjunto $BK$. Chamamos aqui de enriquecimento a adição de novos atributos aos elementos de $VC$. Cada pesquisador possui um conjunto de atributos relevantes, e esse conjunto será expandido com as informações do conjunto $BK$.
 
 %% ------------------------------------------------------------------------- %%
 \section{Desenvolvimento e Testes}
 \label{sec:desenvolvimento-testes}
 
-A estrutura inicial do experimento segue o diagrama abaixo. Ele está dividido em duas fases, a fase A e a fase B. A fase A vai trabalhar apenas com dados relacionados à estrutura da rede, extraídos de um grafo. Já a fase B vai trabalhar com os dados sobre a estrutura da rede mais os dados extraídos da ontologia, que chamamos de conhecimento prévio. Os passos de cada fase serão discutidos a seguir.
+A estrutura inicial do experimento segue o diagrama abaixo.
 
-%TODO explicar diagrama
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.99\textwidth]{diagrama-menor}
@@ -227,16 +224,16 @@ A estrutura inicial do experimento segue o diagrama abaixo. Ele está dividido e
   \label{fig:diagrama-experimento}
 \end{figure}
 
-Na fase A, um grupo pequeno de currículos lattes no formato XML será lido e processado, e serão extraídos dados gerais desses currículos. A partir desses dados, será construído um grafo com atributos, onde cada nó representa um pesquisador, e cada aresta representa alguma relação entre os participantes dessa rede. Desse grafo, será extraído um conjunto de vetores de características, que chamamos de $VC$, separado em conjuntos de treinamento e teste. O modelo de predição será treinado com o conjunto de treinamento, e será testado com o conjunto de teste. Essa fase vai gerar um relatório que lista a eficácia do modelo, pois o resultado da classificação pode ser validado com os dados iniciais.
+Ele está dividido em duas fases, a fase A e fase B. A fase A vai trabalhar apenas com dados relacionados à estrutura da rede, extraídos de um grafo. Já a B vai trabalhar com os dados sobre a estrutura da rede mais os dados extraídos da ontologia, que chamamos de conhecimento prévio. Os passos de cada fase serão discutidos a seguir.
 
-Na fase B, o mesmo grupo de currículos será processado, e com esses dados, será populada a ontologia descrita anteriormente. Serão feitas consultas a respeito das entidades e relações presentes na ontologia, e o seu resultado será transformado em um conjunto de atributos, denominado \textit{background-knowledge}, ou $BK$, como descrito anteriormente. Os vetores de características ($VC$) da fase A serão copiados, e serão associados ao conjunto $BK$, processo que chamaremos de Enriquecimento com conhecimento prévio. Então, outro modelo de predição será instanciado, e receberá como estrada esses dados enriquecidos, também separados em conjunto de treinamento e teste. Será feito o treinamento do modelo, e o teste, e o resultado será analisado.
+Na fase A, um grupo pequeno de currículos lattes no formato XML será lido e processado, e serão extraídos dados gerais desses currículos. A partir desses dados, será construído um grafo com atributos, onde cada nó representa um pesquisador, e cada aresta representa alguma relação entre os participantes dessa rede.
 
-Por fim, será feita a comparação da eficácia de ambos os modelos, verificando se há alguma melhora no método. Também é de interesse avaliar se os atributos adicionais extraídos de $BK$ são relevantes para o modelo, através de uma análise da importância relativa de cada atributo na classificação final.
+Desse grafo, será extraído um conjunto de vetores de características, que chamamos de $VC$, separado em conjuntos de treinamento e teste. O modelo de predição será treinado com o conjunto de treinamento, e será testado com o conjunto de teste. Essa fase vai gerar um relatório que lista a eficácia do modelo, pois o resultado da classificação pode ser validado com os dados iniciais.
 
-O ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspondente à estrutura da ontologia, porém sem nenhuma instância. O software faz o processamento (fases A e B), e gera ao final um relatório comparando ambas as estratégias.
+Na fase B, o mesmo grupo de currículos será processado, utilizando esses dados para popular a ontologia descrita anteriormente. Serão feitas consultas a respeito das entidades e relações presentes na ontologia e o seu resultado será transformado em um conjunto de atributos, denominado \textit{background-knowledge}, ou $BK$, como descrito anteriormente.
 
-%1. Estudar o domínio e modelar uma Ontologia.
-%2. Modelar as consultas à ontologia que servirão para enriquecer o modelo de predição.
-%3. Construir um modelo de predição de ligações baseado nos trabalhos da literatura, fazendo experimentos com diferentes técnicas de aprendizado supervisionado.
-%4. Propor e implementar um algoritmo de extração de conhecimento da ontologia e enriquecimento do modelo de predição.
-%5. Montar ambiente de testes e elaborar alguns testes de comparação.
+Os vetores de características ($VC$) da fase A serão copiados e associados ao conjunto $BK$, processo que chamaremos de enriquecimento com conhecimento prévio. Dessa forma, outro modelo de predição será instanciado e receberá como estrada esses dados enriquecidos, também separados em conjunto de treinamento e teste. Será feito o treinamento do modelo, depois o teste deste modelo, seguido de uma análise do resultado.
+
+Por fim, será feita a comparação da eficácia de ambos os modelos, verificando se há alguma melhora no método. Também será avaliado se os atributos adicionais extraídos de $BK$ são relevantes para o modelo, através de uma análise da importância relativa de cada atributo na classificação final (\textit{feature selection}).
+
+Em suma: o ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspondente à estrutura da ontologia, porém sem nenhuma instância. O software faz o processamento (fases A e B), e gera ao final um relatório comparando ambas as estratégias.
