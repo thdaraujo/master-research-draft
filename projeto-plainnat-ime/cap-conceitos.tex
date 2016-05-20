@@ -20,7 +20,7 @@ Esse conhecimento prévio pode ser cumulativo: novas observações podem gerar n
 
 Uma das áreas que se concentra nesse tipo de problema de aprendizado é chamada de \textit{Inductive Logic Programming} (ILP), que é uma intersecção entre Aprendizado de Máquina e Programação Lógica. Os programas lógicos são compostos por fatos ou predicados que descrevem exemplos (observações do mundo), conhecimento prévio, e hipóteses. Partindo disto, o programa deriva de forma indutiva um conjunto de novas hipóteses que tenham como consequência lógica todos os exemplos positivos e nenhum dos negativos. Esse conjunto de hipóteses é também chamado de teoria. As novas hipóteses geradas devem ser consistentes com as teorias já presentes no programa. O interessante dessa técnica é o uso de conhecimento prévio definido de uma forma declarativa e compacta, o reaproveitamento de hipóteses e a garantia da consistência.
 
-Com o uso de conhecimento prévio, é reduzida a complexidade do aprendizado, pois as novas hipóteses geradas devem ser consistentes com o as hipóteses anteriores, e isso reduz o conjunto de possibilidades que o algoritmo precisaria considerar, além de conseguir explicar parte das novas observações, através do reaproveitamento das hipóteses encontradas ou declaradas anteriormente (idem). Por isso, podemos dizer que problemas expressos de forma relacional podem ser tratados muito bem com algoritmos de ILP e com o uso de conhecimento prévio.
+Com o uso de conhecimento prévio, é reduzida a complexidade do aprendizado, pois as novas hipóteses geradas devem ser consistentes com as hipóteses anteriores, e isso reduz o conjunto de possibilidades que o algoritmo precisaria considerar, além de conseguir explicar parte das novas observações, através do reaproveitamento das hipóteses encontradas ou declaradas anteriormente \citep[capítulo 19]{AIMA}. Por isso, podemos dizer que problemas expressos de forma relacional podem ser tratados muito bem com algoritmos de ILP e com o uso de conhecimento prévio.
 
 %% ------------------------------------------------------------------------- %%
 \section{Hierarquia de Representações em Problemas de Aprendizado}
@@ -61,9 +61,3 @@ Por tudo isso, podemos dizer que uma ontologia é uma ferramenta bastante podero
 Quanto às questões práticas, existem algumas ferramentas interessantes que podem ser utilizadas para se trabalhar com ontologias. Uma delas é o Protégé, que é um editor de ontologias \textit{open-source} escrito em java. Segundo \citet{noy2003protege}, a comunidade possui milhares de usuários ativos, e o projeto é muito utilizado na criação de sistemas inteligentes e na engenharia de ontologias. Ele é capaz de armazenar os dados em diferentes formatos, como XML, RDF, e até em bancos de dados. Utiliza a OWL-API, uma biblioteca para java muito utilizada na construção e manipulação de ontologias OWL, descrita por \citet{Horridge:2011:OAJ:2019470.2019471}.
 
 Outra ferramenta interessante é a \citet{tawnyowl}, desenvolvida por \citet{DBLP:journals/corr/abs-1303-0213}, que nada mais é que uma linguagem de domínio específico feita para a construção de ontologias OWL que também tem como suporte a OWL-API. Essa biblioteca foi desenvolvida na linguagem de programação clojure, que é um dialeto de LISP que roda na Java Virtual Machine (JVM). A biblioteca Tawny-OWL possui um conjunto rico de ferramentas extensíveis com um grande poder de abstração. Outra vantagem é a possibilidade do uso de programação paralela e distribuída para o tratamento de grandes volumes de dados, algo que o clojure suporta muito bem.
-
-%% ------------------------------------------------------------------------- %%
-%\section{OWL}
-%\label{sec:owl}
-
-%TODO owl
