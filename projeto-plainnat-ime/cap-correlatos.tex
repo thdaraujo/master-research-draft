@@ -72,7 +72,7 @@ O grande desafio desse modelo de aprendizado é a seleção de atributos (\texti
 
 Em um trabalho posterior, \citet{Popescul2007} sugerem um modelo interessante de seleção de atributos: a geração de novos atributos se dá via busca no conjunto de atributos possíveis, e sua seleção é feita através de um teste que avalia a significância estatística da inclusão desse atributo no modelo de predição.
 
-Aplicado ao mesmo problema de predição de citações, o conjunto de atributos possíveis surgiam de consultas SQL relacionadas às entidades pertencentes a um banco de dados relacional, e o algoritmo explorava esse conjunto e selecionava os atributos mais relevantes segundo sua significância estatística. O interessante desse trabalho é que o algoritmo, ao gerar novos atributos, adicionava essas novas informações no mesmo banco de dados como novas relações entre entidades, enriquecendo ainda mais o modelo.
+Aplicado ao mesmo problema de predição de citações, o conjunto de atributos possíveis é derivado de consultas SQL relacionadas às entidades pertencentes a um banco de dados relacional, e o algoritmo explorava esse conjunto e selecionava os atributos mais relevantes segundo sua significância estatística. O interessante desse trabalho é que o algoritmo, ao gerar novos atributos, adicionava essas novas informações no mesmo banco de dados como novas relações entre entidades, enriquecendo ainda mais o modelo.
 
 Nossa proposta é parecida, pois também desejamos gerar novos atributos para essas entidades, explorando algumas consultas possíveis, extraindo conhecimento e formalizando esse resultado como \textit{background-knowledge}, que será usado para enriquecer o modelo de aprendizado.  A principal diferença está no uso de uma ontologia em vez de um banco de dados relacional.
 
@@ -89,8 +89,7 @@ Uma rede social é uma estrutura relacional que podemos facilmente representar p
 \label{ssec:lattes}
 
 No caso da Plataforma Lattes, \citet{Anaue2009} construíram uma ontologia capaz de responder a diversas questões de competência. O usuário consulta a base usando linguagem natural, e a ontologia consegue encontrar a informação desejada, através de inferência. A vantagem dessa metodologia é a facilidade na modelagem, nas ferramentas de inferência, e na
-expressividade da representação. \citet{Galego2013} também desenvolveu uma ontologia para esse domínio, mas seu interesse era trabalhar com Web Semântica, gerar relatórios e detectar inconsistências.
-
+expressividade da representação. \citet{Galego2013} também desenvolveu uma ontologia para esse domínio como uma extensão de um trabalho anterior, e seu interesse foi gerar relatórios e detectar inconsistências.
 
 %% ------------------------------------------------------------------------- %%
 \section{Justificativa}
