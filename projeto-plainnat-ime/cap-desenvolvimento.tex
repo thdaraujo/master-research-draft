@@ -186,7 +186,8 @@ Na fase A do experimento será construído um grafo com atributos similar ao des
 
 O conhecimento prévio, que chamaremos de $BK$, será extraído da ontologia através das consultas SPARQL e estruturado em uma matriz da seguinte forma: seja $P$ o conjunto de pesquisadores presentes na ontologia. Cada linha da tabela resultante corresponde a um elemento do conjunto de pares distintos de pesquisadores $Q = \{ (a, b) | a \in P \text{ e } b \in P \text{ e } a \neq b \}$, e cada coluna recebe o valor de algum atributo de $a$, ou de $b$, ou $R(a,b)$ (uma relação entre $a$ e $b$). $R(a,b) = 1$ se a relação existir ou for válida, e $R(a,b) = -1$ em caso contrário.
 
-Como exemplo, admita um conjunto $P = \{ p_1, p_2, p_3 \}$ e algumas relações como $R = \{ orienta, coautor \}$. Sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. Também conhecemos alguns atributos desses pesquisadores: todos eles pertencem à área Ciência da Computação cujo identificador será, digamos, 123. Portanto, a matriz resultante será:
+Como exemplo, admita um conjunto $P = \{ p_1, p_2, p_3 \}$ e algumas relações
+como $R = \{ orienta, coautor \}$. Sabemos que $p_1$ \texttt{orienta} $p_2$, pois $p_1$ foi orientador de $p_2$ em seu doutorado. E também sabemos que $p_1$ \texttt{coautor} $p_2$ e $p_1$ \texttt{coautor} $p_3$ e $p_2$ \texttt{coautor} $p_3$, pois os três publicaram um artigo juntos. Também conhecemos alguns atributos desses pesquisadores: todos eles pertencem à área Ciência da Computação cujo identificador será, digamos, 123. Portanto, a matriz resultante será:
 
 \begin{table}[h!]
     \centering
@@ -226,7 +227,7 @@ A estrutura inicial do experimento segue o diagrama da \autoref{fig:diagrama-exp
 
 Ele está dividido em duas fases, a fase A e fase B. A fase A vai trabalhar apenas com dados relacionados à estrutura da rede, extraídos de um grafo. Já a B vai trabalhar com os dados sobre a estrutura da rede mais os dados extraídos da ontologia, que chamamos de conhecimento prévio. Os passos de cada fase serão discutidos a seguir.
 
-Na fase A, um grupo pequeno de currículos lattes no formato XML será lido e processado, e serão extraídos dados gerais desses currículos. A partir desses dados, será construído um grafo com atributos, onde cada nó representa um pesquisador, e cada aresta representa alguma relação entre os participantes dessa rede.
+Na fase A, um grupo pequeno de currículos Lattes no formato XML será lido e processado, e serão extraídos dados gerais desses currículos. A partir desses dados, será construído um grafo com atributos, onde cada nó representa um pesquisador, e cada aresta representa alguma relação entre os participantes dessa rede.
 
 Desse grafo, será extraído um conjunto de vetores de características, que chamamos de $VC$, separado em conjuntos de treinamento e teste. O modelo de predição será treinado com o conjunto de treinamento, e será testado com o conjunto de teste. Essa fase vai gerar um relatório que lista a eficácia do modelo, pois o resultado da classificação pode ser validado com os dados iniciais.
 
