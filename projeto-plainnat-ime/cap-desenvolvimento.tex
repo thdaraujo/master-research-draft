@@ -247,9 +247,9 @@ como $R = \{ orienta, coautor \}$. Sabemos que $p_1$ \texttt{orienta} $p_2$, poi
 
 Entretanto, essa matriz pode ter um tamanho muito grande, dependendo da quantidade de pesquisadores. Uma solução possível seria limitar os exemplos, mostrando apenas os pares de pesquisadores que também possuem relação de coautoria. Entretanto, o impacto dessa alteração na eficácia do método ainda precisa ser investigado.
 
-O modelo de predição receberá como entrada esse conjunto de dados $BK$, separado aleatoriamente em subconjuntos de treinamento e teste. Após o treinamento, durante os testes, o modelo deverá prever se existe ou não uma relação de coautoria a partir dos atributos desse par de pesquisadores através da classificação de cada um dos exemplos. Esse resultado será posteriormente validado com o conjunto original, sendo possível com isso medir a eficiência do método.
+O conjunto de vetores de características $VC$, gerado na fase A, será copiado na fase B e enriquecido com as informações extraídas do conjunto $BK$. Chamamos aqui de enriquecimento a adição de novos atributos e relações aos elementos de $VC$. Cada pesquisador possui um conjunto de atributos relevantes, e esse conjunto será expandido com as informações do conjunto $BK$, gerando o conhecimento-prévio enriquecido, ou \textit{BK-enriched data} ($BK_e$).
 
-O conjunto de vetores de características $VC$, gerado na fase A, será copiado na fase B e enriquecido com as informações extraídas do conjunto $BK$. Chamamos aqui de enriquecimento a adição de novos atributos aos elementos de $VC$. Cada pesquisador possui um conjunto de atributos relevantes, e esse conjunto será expandido com as informações do conjunto $BK$.
+O modelo de predição receberá como entrada esse conjunto de dados $BK_e$, separado aleatoriamente em subconjuntos de treinamento e teste. Após o treinamento, durante os testes, o modelo deverá prever se existe ou não uma relação de coautoria a partir dos atributos desse par de pesquisadores através da classificação de cada um dos exemplos. Esse resultado será posteriormente validado com o conjunto original, sendo possível com isso medir a eficiência do método.
 
 %% ------------------------------------------------------------------------- %%
 \section{Desenvolvimento e Testes}
@@ -272,8 +272,8 @@ Desse grafo, será extraído um conjunto de vetores de características, que cha
 
 Na fase B, o mesmo grupo de currículos será processado, utilizando esses dados para popular a ontologia descrita anteriormente. Serão feitas consultas a respeito das entidades e relações presentes na ontologia e o seu resultado será transformado em um conjunto de atributos, denominado \textit{background-knowledge}, ou $BK$, como descrito anteriormente.
 
-Os vetores de características ($VC$) da fase A serão copiados e associados ao conjunto $BK$, processo que chamaremos de enriquecimento com conhecimento prévio. Dessa forma, outro modelo de predição será instanciado e receberá como estrada esses dados enriquecidos, também separados em conjunto de treinamento e teste. Será feito o treinamento do modelo, depois o teste deste modelo, seguido de uma análise do resultado.
+Os vetores de características ($VC$) da fase A serão copiados e associados ao conjunto $BK$, processo que chamaremos de enriquecimento com conhecimento prévio, gerando o conjunto enriquecido $BK_e$. Dessa forma, outro modelo de predição será instanciado e receberá como estrada esses dados enriquecidos, também separados em conjunto de treinamento e teste. Será feito o treinamento do modelo, depois o teste deste modelo, seguido de uma análise do resultado.
 
-Por fim, será feita a comparação da eficácia de ambos os modelos, verificando se há alguma melhora no método. Também será avaliado se os atributos adicionais extraídos de $BK$ são relevantes para o modelo, através de uma análise da importância relativa de cada atributo na classificação final (\textit{feature selection}).
+Por fim, será feita a comparação da eficácia de ambos os modelos, verificando se há alguma melhora no método. Também será avaliado se os atributos adicionais extraídos de $BK_e$ são relevantes para o modelo, através de uma análise da importância relativa de cada atributo na classificação final (\textit{feature selection}).
 
 Em suma: o ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspondente à estrutura da ontologia, porém sem nenhuma instância. O software faz o processamento (fases A e B), e gera ao final um relatório comparando ambas as estratégias.
