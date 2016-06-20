@@ -14,144 +14,183 @@ Com base nessas informações, modelamos uma ontologia utilizando OWL através d
 
 A ontologia Friend of a friend (FOAF), que descreve pessoas, relações e suas atividades, foi escolhida como ponto de partida devido o fato de ela ter alguns conceitos, classes e termos que nos auxiliam na modelagem da rede de colaboração científica.
 
-A ontologia criada para este experimento possui a seguinte estrutura de classes (TBOX):
+As classes mais importantes da ontologia criada para este experimento são:
 
-\begin{alltt}
-Class: Grupo \( \equiv \) foaf:Group
-SubClassOf: Agent
-Descrição: \emph{Classe que define grupos de pessoas.}
-Relações:
-  membros \( \equiv \) member
+\begin{description}
+  \item[Grupo] define grupos de pessoas (grupos de pesquisa, por exemplo).
+  \item[Organização] define uma organização, que pode ser uma Universidade, por
+  exemplo.
+  \item[Universidade] \emph{(subclasse de \textbf{Organização})} classe das universidades e instituições de ensino e pesquisa.
+  \item[Instituto] \emph{(subclasse de \textbf{Organização})} classe dos institutos de ensino e pesquisa e faculdades.
+  \item[Departamento] \emph{(subclasse de \textbf{Organização})} classe dos departamentos ligados a institutos de pesquisa ou faculdades.
+  \item[Pessoa] classe-pai dos tipos de pessoa.
+  \item[Pesquisador] \emph{(subclasse de \textbf{Pessoa})} define pesquisadores, que são pessoas que publicam artigos e desempenham outras atividades científicas. Podem também ser alunos de cursos de pós-graduação, professores, e outros tipos de pessoas.
+  \item[Publicação] define artigos científicos e outras publicações de
+  revistas, simpósios e outros eventos.
+  \item[Veículo] veículos de publicação de artigos científicos, como revistas, jornais, e eventos como simpósios e conferências.
+  \item[Local] define os locais geográficos.
+  \item[País] \emph{(subclasse de \textbf{Local})} classe dos países.
+  \item[Cidade] \emph{(subclasse de \textbf{Local})} classe das cidades.
+\end{description}
 
-Class: Organização \( \equiv \) foaf:Organization
-SubClassOf: Agent
-Descrição: \emph{Define uma organização, que pode ser uma Universidade, por
-exemplo.}
-Relações:
-  faz_parte \( \equiv \) sub_organizacao: \emph{Uma \textbf{Organização}
-  pode fazer parte de outra \textbf{Organização}, por exemplo: o
-  Instituto de Física faz parte da USP.}
-  possui \( \equiv \) super_organizacao: \emph{Uma \textbf{Organização} pode
-  possuir outra \textbf{Organização}, por exemplo: A USP possui o
-  Instituto de Física.}
+Algumas relações entre as entidades acima são importantes. Citamos algumas dessas relações abaixo:
 
-Class: Universidade
-SubClassOf: Organização
-Descrição: \emph{Classe das universidades e instituições
-de ensino.}
+\begin{description}
+  \item[membro\_de] uma \textbf{Pessoa} pode ser membro de um \textbf{Grupo}. É o inverso da relação \textbf{membro}.
+  \item[autor] uma \textbf{Pessoa} pode ser o autor de uma \textbf{Publicação}. É o inverso da relação \textbf{tem\_autores}.
+  \item[trabalhou\_em] uma \textbf{Pessoa} pode trabalhar ou ter trabalhado em uma \textbf{Organização}.
+  \item[publicou] um \textbf{Veículo} pode publicar uma \textbf{Publicação}, como um artigo. É o inverso da relação \textbf{publicado\_em}.
+  \item[publicado\_em] uma \textbf{Publicação} pode ser publicada em
+  um \textbf{Veículo} qualquer, como uma revista. É o inverso da relação \textbf{publicou}.
+  \item[tem\_autores] uma \textbf{Publicação} possui um ou mais autores da classe
+  \textbf{Pesquisador}. Essa propriedade é importante pois indica uma relação de
+  \textit{coautoria} entre dois pesquisadores.
+  \item[localizado] relaciona uma entidade como \textbf{Organização} ou \textbf{Veículo} com um local geográfico, como uma \textbf{Cidade}.
+\end{description}
 
-Class:Instituto
-SubClassOf: Organização
-Descrição: \emph{Classe dos institutos de ensino e pesquisa e faculdades.}
 
-Class: Departamento
-SubClassOf: Organização
-Descrição: \emph{Classe dos departamentos ligados a institutos de pesquisa ou
-faculdades.}
+% TODO onto def
+\begin{comment}
 
-Class: Revista
-SubClassOf: Organização
-Descrição: \emph{Classe das revistas científicas que publicam artigos.}
-Relações:
-  publicou: \emph{Uma \textbf{Revista} pode publicar um \textbf{Artigo}. É o
-  inverso da relação \textbf{publicado_em}.}
+  \begin{alltt}
+  \textit{Classe:} \textbf{Grupo} (subclasse de \textbf{Agent})
+  \emph{Classe que define grupos de pessoas.}
+  Relações:
+  \begin{itemize}
+  \item membros \( \equiv \) member
+  \end{itemize}
 
-Class: Pessoa \( \equiv \) foaf:Person
-SubClassOf: Agent
-Descrição: \emph{Classe-pai dos tipos de pessoa.}
-Relações:
-  cursou: \emph{Uma \textbf{Pessoa} pode cursar algum \textbf{Curso}.}
-  estudou_em: \emph{Uma \textbf{Pessoa} pode ter estudado em alguma
-  \textbf{Universidade, Instituto, Faculdade}.}
-  membro_de: \emph{uma \textbf{Pessoa} pode ser membro de um  \textbf{Grupo}.
-  É o inverso da relação \textbf{membro}.}
-  autor: \emph{Uma \textbf{Pessoa} pode ser autora de um  \textbf{Documento}.
-  É o inverso da relação \textbf{tem_autores}.}
-  trabalhou_em: \emph{uma \textbf{Pessoa} pode trabalhar ou ter trabalhado
-  em uma \textbf{Organização}.}
+  Class: Organização \( \equiv \) foaf:Organization
+  SubClassOf: Agent
+  Descrição: \emph{Define uma organização, que pode ser uma Universidade, por
+  exemplo.}
+  Relações:
+    faz_parte \( \equiv \) sub_organizacao: \emph{Uma \textbf{Organização}
+    pode fazer parte de outra \textbf{Organização}, por exemplo: o
+    Instituto de Física faz parte da USP.}
+    possui \( \equiv \) super_organizacao: \emph{Uma \textbf{Organização} pode
+    possuir outra \textbf{Organização}, por exemplo: A USP possui o
+    Instituto de Física.}
 
-Class: Aluno
-SubClassOf: Pessoa
-Descrição: \emph{Classe dos indivíduos que são alunos de algum curso.}
-Relações:
-  tem_orientador: \emph{Um \textbf{Aluno} pode ser orientado por um
-  \textbf{Professor} ou outro pesquisador.}
+  Class: Universidade
+  SubClassOf: Organização
+  Descrição: \emph{Classe das universidades e instituições
+  de ensino.}
 
-Class: Professor
-SubClassOf: Pessoa
-Descrição: \emph{Classe dos professores.}
-Relações:
-  orienta: \emph{Um \textbf{Professor} pode orientar um
-  \textbf{Aluno}. É o inverso da relação \textbf{tem_orientador}.}
-  tem_orientador: \emph{Um \textbf{Professor} pode ser orientado por
-  um outro \textbf{Professor}, mesmo que no passado.}
+  Class:Instituto
+  SubClassOf: Organização
+  Descrição: \emph{Classe dos institutos de ensino e pesquisa e faculdades.}
 
-Class: Curso
-SubClassOf: Thing
-Descrição: \emph{Classe dos cursos de graduação e pós-graduação.}
-Relações:
-  cursado_por: \emph{Um \textbf{Curso} pode ser cursado por \textbf{Pessoas}.}
-  tipo_de_curso: \emph{Um \textbf{Curso} pode ser de Pós-Graduação ou
-  Graduação.}
-  oferecido_por: \emph{Pode ser oferecido por uma instituição.}
+  Class: Departamento
+  SubClassOf: Organização
+  Descrição: \emph{Classe dos departamentos ligados a institutos de pesquisa ou
+  faculdades.}
 
-Class: Graduação
-SubClassOf: Tipo de Curso
-Descrição: \emph{Classe dos cursos de graduação.}
+  Class: Revista
+  SubClassOf: Organização
+  Descrição: \emph{Classe das revistas científicas que publicam artigos.}
+  Relações:
+    publicou: \emph{Uma \textbf{Revista} pode publicar um \textbf{Artigo}. É o
+    inverso da relação \textbf{publicado_em}.}
 
-Class: Pós Graduação
-SubClassOf: Tipo de Curso
-Descrição: \emph{Classe dos cursos de pós-graduação.}
+  Class: Pessoa \( \equiv \) foaf:Person
+  SubClassOf: Agent
+  Descrição: \emph{Classe-pai dos tipos de pessoa.}
+  Relações:
+    cursou: \emph{Uma \textbf{Pessoa} pode cursar algum \textbf{Curso}.}
+    estudou_em: \emph{Uma \textbf{Pessoa} pode ter estudado em alguma
+    \textbf{Universidade, Instituto, Faculdade}.}
+    membro_de: \emph{uma \textbf{Pessoa} pode ser membro de um  \textbf{Grupo}.
+    É o inverso da relação \textbf{membro}.}
+    autor: \emph{Uma \textbf{Pessoa} pode ser autora de um  \textbf{Documento}.
+    É o inverso da relação \textbf{tem_autores}.}
+    trabalhou_em: \emph{uma \textbf{Pessoa} pode trabalhar ou ter trabalhado
+    em uma \textbf{Organização}.}
 
-Class: Documento \( \equiv \) foaf:Document
-SubClassOf: Thing
-Descrição: \emph{Classe dos documentos produzidos por alunos,
-professores e pesquisadores, como um artigo científico.}
-Relações:
-  tem_autores: \emph{Um documento possui um ou mais autores do tipo
-  \textbf{Pessoa}. Essa propriedade é importante pois indica uma relação de
-  \textbf{coautoria} entre dois pesquisadores.}
+  Class: Aluno
+  SubClassOf: Pessoa
+  Descrição: \emph{Classe dos indivíduos que são alunos de algum curso.}
+  Relações:
+    tem_orientador: \emph{Um \textbf{Aluno} pode ser orientado por um
+    \textbf{Professor} ou outro pesquisador.}
 
-Class: Publicacao
-SubClassOf: Documento
-Descrição: \emph{Classe dos artigos científicos e outras publicações de
-revistas, simpósios e outros eventos.}
-Relações:
-  publicado_em: \emph{Uma \textbf{Publicação} pode ser publicada em
-  uma \textbf{Revista} ou um \textbf{Evento}.}
+  Class: Professor
+  SubClassOf: Pessoa
+  Descrição: \emph{Classe dos professores.}
+  Relações:
+    orienta: \emph{Um \textbf{Professor} pode orientar um
+    \textbf{Aluno}. É o inverso da relação \textbf{tem_orientador}.}
+    tem_orientador: \emph{Um \textbf{Professor} pode ser orientado por
+    um outro \textbf{Professor}, mesmo que no passado.}
 
-Class: Tese
-SubClassOf: Documento
-Descrição: \emph{Classe-pai das Teses científicas de doutorado e
-dissertações de mestrado.}
+  Class: Curso
+  SubClassOf: Thing
+  Descrição: \emph{Classe dos cursos de graduação e pós-graduação.}
+  Relações:
+    cursado_por: \emph{Um \textbf{Curso} pode ser cursado por \textbf{Pessoas}.}
+    tipo_de_curso: \emph{Um \textbf{Curso} pode ser de Pós-Graduação ou
+    Graduação.}
+    oferecido_por: \emph{Pode ser oferecido por uma instituição.}
 
-Class: Eventos
-SubClassOf: Thing
-Descrição: \emph{Classe-pai dos eventos científicos, conferências, e simpósios.}
-Relações:
-  publicou: \emph{Um \textbf{Evento} pode ter publicações de \textbf{Artigos}.}
+  Class: Graduação
+  SubClassOf: Tipo de Curso
+  Descrição: \emph{Classe dos cursos de graduação.}
 
-Class: foaf:Spatial Thing
-Descrição: \emph{Classe das entidades que possuem alguma
-localização geográfica. \textbf{Evento} é uma delas.}
+  Class: Pós Graduação
+  SubClassOf: Tipo de Curso
+  Descrição: \emph{Classe dos cursos de pós-graduação.}
 
-Classe: Local
-SubClassOf: Thing
-Descrição: \emph{Classe dos locais geográficos.}
-Relações:
-  localizado \( \equiv \) foaf:based near \emph{Relaciona \textbf{Organização}
-  ou \textbf{Evento} com um local geográfico.}
+  Class: Documento \( \equiv \) foaf:Document
+  SubClassOf: Thing
+  Descrição: \emph{Classe dos documentos produzidos por alunos,
+  professores e pesquisadores, como um artigo científico.}
+  Relações:
+    tem_autores: \emph{Um documento possui um ou mais autores do tipo
+    \textbf{Pessoa}. Essa propriedade é importante pois indica uma relação de
+    \textbf{coautoria} entre dois pesquisadores.}
 
-Class: País
-SubClassOf: Local
+  Class: Publicacao
+  SubClassOf: Documento
+  Descrição: \emph{Classe dos artigos científicos e outras publicações de
+  revistas, simpósios e outros eventos.}
+  Relações:
+    publicado_em: \emph{Uma \textbf{Publicação} pode ser publicada em
+    uma \textbf{Revista} ou um \textbf{Evento}.}
 
-Class: Continente
-SubClassOf: Local
+  Class: Tese
+  SubClassOf: Documento
+  Descrição: \emph{Classe-pai das Teses científicas de doutorado e
+  dissertações de mestrado.}
 
-Class: Cidade
-SubClassOf: Local
+  Class: Eventos
+  SubClassOf: Thing
+  Descrição: \emph{Classe-pai dos eventos científicos, conferências, e simpósios.}
+  Relações:
+    publicou: \emph{Um \textbf{Evento} pode ter publicações de \textbf{Artigos}.}
 
-\end{alltt}
+  Class: foaf:Spatial Thing
+  Descrição: \emph{Classe das entidades que possuem alguma
+  localização geográfica. \textbf{Evento} é uma delas.}
+
+  Classe: Local
+  SubClassOf: Thing
+  Descrição: \emph{Classe dos locais geográficos.}
+  Relações:
+    localizado \( \equiv \) foaf:based near \emph{Relaciona \textbf{Organização}
+    ou \textbf{Evento} com um local geográfico.}
+
+  Class: País
+  SubClassOf: Local
+
+  Class: Continente
+  SubClassOf: Local
+
+  Class: Cidade
+  SubClassOf: Local
+
+  \end{alltt}
+
+\end{comment}
 
 %% ------------------------------------------------------------------------- %%
 \section{Consultas}
