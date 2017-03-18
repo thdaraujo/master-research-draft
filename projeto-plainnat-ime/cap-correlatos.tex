@@ -92,6 +92,37 @@ No caso da Plataforma Lattes, \citet{Anaue2009} construíram uma ontologia capaz
 expressividade da representação. \citet{Galego2013} também desenvolveu uma ontologia para esse domínio como uma extensão do trabalho anterior, e seu interesse foi gerar relatórios e detectar inconsistências.
 
 %% ------------------------------------------------------------------------- %%
+% TODO pensar em um nome para essa seção
+\section{Bancos de Dados}
+\label{sec:bd}
+
+%% ------------------------------------------------------------------------- %%
+\subsection{MongoDB}
+\label{ssec:mongodb}
+
+Um recente trabalho de [\citenum{Botoeva}] utiliza NoSQL em aplicações OBDA,
+propondo uma arquitetura genérica de OBDA aplicado a qualquer tipo de SGBD.
+A primeira aplicação desta arquitetura foi feita com o MongoDB. Com isso,
+foi possível mapear uma ontologia com um conjunto salvo em um banco de dados
+e fazer a conversão da consulta SPARQL em uma consulta MongoDB, eliminando
+assim a necessidade de se extrair previamente esses dados e transformá-los
+em RDF ou popular a ontologia antes da consulta.
+
+[\citenum{michel2016mapping}] construiu uma ferramenta de mapeamento de
+consultas SPARQL em consultas a uma base MongoDB para tornar públicos os dados
+de uma base legada.
+
+A técnica utilizada consiste em gerar uma base RDF virtual, ou seja, os
+documentos salvos na base foram expostos em formato RDF. Foi proposto um
+método de tradução em 2 passos: primeiro, a consulta SPARQL é transformada em
+uma consulta abstrata usando mapeamentos MongoDB para RDF escritos em uma
+linguagem intermediária chamada xR2RML. Depois, essa consulta intermediária
+é transformada em uma consulta MongoDB concreta. Como resultado,
+concluíram que é sempre possível reescrever uma consulta que produza resultados
+corretos.
+
+
+%% ------------------------------------------------------------------------- %%
 \section{Justificativa}
 \label{sec:justificativa}
 
