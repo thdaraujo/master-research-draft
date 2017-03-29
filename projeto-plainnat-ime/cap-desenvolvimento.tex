@@ -277,3 +277,112 @@ Os vetores de características ($VC$) da fase A serão copiados e associados ao 
 Por fim, será feita a comparação da eficácia de ambos os modelos, verificando se há alguma melhora no método. Também será avaliado se os atributos adicionais extraídos de $BK_e$ são relevantes para o modelo, através de uma análise da importância relativa de cada atributo na classificação final (\textit{feature selection}).
 
 Em suma: o ambiente de testes recebe um conjunto de currículos e um arquivo OWL correspondente à estrutura da ontologia, porém sem nenhuma instância. O software faz o processamento (fases A e B), e gera ao final um relatório comparando ambas as estratégias.
+
+
+%% ------------------------------------------------------------------------- %%
+\section{onto-mongo}
+\label{sec:onto-mongo}
+
+O \textit{onto-mongo}\footnotemark é um sistema desenvolvido para tratar o
+problema de transformação de consultas SPARQL em consultas ao SGBD noSQL. Ele
+transforma consultas SPARQL oriundas de alguma Ontologia OWL em consultas ao
+MongoDB através de um mapeamento. O resultado desta consulta é transformada em
+triplas RDF que são usadas pela ontologia.
+
+\footnotetext{O projeto é de código aberto e o repositório está disponível no
+github, em: \url{http://github.com/thdaraujo/onto-mongo} }
+
+O protótipo possui as seguintes partes:
+\begin{itemize}
+    \item API
+    \item Ontologia %TODO ?
+    \item Mapeamento Ontologia x Coleções do Banco de Dados
+    \item Tradutor de Consultas SPARQL em Consultas NoSQL
+    \item Exportação
+    \item Atualização da Ontologia %TODO ?
+\end{itemize}
+
+\subsection{API}
+Uma API, ou Interface de Programação de Aplicações, é uma aplicação web que
+possui um conjunto definido de requisições e respostas HTTP, e serve para
+integrações entre sistemas ou serviços diversos. Em nosso caso, a API é um
+software que recebe mensagens de entrada com consultas em linguagem SPARQL e
+responde a essas consultas com um conjunto de triplas RDF extraídas de um banco
+de dados.
+
+Essa API foi desenvolvida na linguagem \textit{ruby} e utiliza o framework
+\textit{ruby on rails}, que foi criado para facilitar a criação de aplicações e
+serviços web.
+
+\subsection{Mapeamento}
+A API possui classes escritas na linguagem \textit{ruby}, que é uma linguagem
+orientada a objetos. Essas classes representam coleções presentes no banco de
+dados onde são guardadas informações a respeito de pesquisadores e suas
+publicações. Através destas classes, é possível consultar o banco de dados,
+através do Mongoid.
+
+Nosso mapeamento foi construído para ligar as classes da ontologia com as
+classes do onto-mongo, para que fosse possível consultar informações
+relacionadas a essas entidades no banco de dados de forma fácil. Utilizando essa
+ abordagem, uma classe da ontologia é mapeada para uma classe ruby que
+ representa ideias similares. As relações entre classes da ontologia também são
+ mapeadas para relações entre classes da linguagem orientada a objetos.
+
+O mapeamento é feito através da adição de alguns métodos de classe que indicam
+qual relação entre classes e propriedades da ontologia equivalem a qual atributo
+ na classe ruby, ou a qual relação entre classes da ontologia é equivalente a
+ uma relação entre classes do onto-mongo.
+
+Com isso, tornou-se possível mapear a estrutura presente na ontologia com a
+estrutura das coleções presentes no banco de dados, passando pelas classes do
+projeto, conforme mostrado a seguir:
+
+% \lstinputlisting[language=Ruby, caption={Classe Researcher da API}, numbers=left]{files/researcher.rb}
+
+% \lstinputlisting[language=Ruby, caption={Classe Publication da API}, numbers=left]{files/publication.rb}
+
+Incluindo o módulo \textit{OntoMap} (linha 3 de ambas as classes) em uma classe
+ruby como um \textit{mixin}, que é um tipo especial de herança múltipla, e que
+provê novas funcionalidades à classe e o acesso aos métodos de mapeamento,
+passando com isso a fazer parte da tradução. Já o método \textit{ontoclass}
+(linha 9 de \textit{Researcher}) define qual classe da ontologia está
+relacionada à classe \textit{Researcher}. No caso, ela se relaciona com a
+classe \textit{foaf:Person} da ontologia.
+
+O método \textit{maps} recebe dois parâmetros: \textit{from}, que diz respeito a
+ algum relacionamento ou propriedade pertencente a uma classe da ontologia e
+ \textit{to}, que indica qual atributo da classe \textit{Researcher} ou
+ relacionamento com outra classe são equivalentes. Na linha 9, definimos um
+ mapeamento entre a propriedade \textit{foaf:name} e o atributo \textit{name}.
+ Na linha 10, a relação \textit{published} é mapeada para
+ \textit{publications}, que representa o conjunto de publicações de um dado
+ pesquisador. Importante ressaltar que uma instância da classe pesquisador
+ pode possuir uma ou mais publicações.
+
+O mapeamento aqui apresentado permitiu a tradução das consultas SPARQL em
+consultas MongoDB sem a necessidade de haver um mapeamento direto entre a
+estrutura da ontologia com as coleções de documentos do banco de dados. Em
+outros trabalhos da literatura, quando falamos de OBDA para SGBDs relacionais,
+esse tipo de mapeamento se faz diretamente entre consultas SQL e classes da
+ontologia. Nossa abordagem possui assim uma camada conceitual que faz a ligação
+entre ontologia e os dados descrita em uma linguagem orientada a objetos.
+
+\subsection{Tradutor}
+O tradutor transforma consultas SPARQL em consultas ao SGBD, utilizando para
+isso o mapeamento. A consulta SPARQL é primeiro transformada em uma
+\textit{SPARQL Syntax Expression (S-Expression)} através da biblioteca
+\textit{sxp}\footnotemark, pois isto facilita a tradução. A consulta é então
+transformada em uma estrutura de dados parecida com uma lista aninhada que
+contem as triplas RDF, filtros, agrupamentos, e variáveis que devem ser
+retornadas para esta consulta.
+
+\footnotetext{Disponível em: \url{https://github.com/dryruby/sxp.rb} }
+
+\subsection{Exportação}
+Os dados extraídos do banco de dados são transformados em triplas RDF, que são
+enviadas como resposta à consulta SPARQL inicial. Com isso, é possível popular
+uma ontologia ou consultar e analisar esses dados de forma agnóstica, isto é,
+sem que o cliente precise saber da estrutura do banco de dados e como estão
+armazenadas as informações.
+
+% TODO falar do retorno para a ontologia ou protegé etc.
