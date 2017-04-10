@@ -96,6 +96,96 @@ expressividade da representação. \citet{Galego2013} também desenvolveu uma on
 \section{Ontology-Based Data Access}
 \label{sec:obda-papers}
 
+
+%% ------------------------------------------------------------------------- %%
+\section{SQL}
+\label{sec:sql}
+
+Uma das primeiras formas de se trabalhar com ODBA com SGBDs relacionais
+é feita através da tradução de consultas SPARQL originadas de uma ontologia
+para SQL, que é a linguagem de destino. Com isto, é possível extrair
+informações do banco de dados e exportá-las para RDF.
+
+O trabalho de \citet{Prudhommeaux2008} propõe uma forma de expressar dados
+relacionais como um grafo RDF, e uma álgebra para mapear consultas SPARQL
+do tipo SELECT sobre o grafo RDF em consultas SQL sobre um conjunto de dados
+relacionais. O grafo RDF é construído com base na estrutura relacional
+juntamente com identificadores URI. A álgebra especifica uma função que
+recebe como entrada um identificador, um esquema relacional e uma query SPARQL
+nesse mesmo grafo, e gera uma consulta relacional que pode ser executada
+em um banco de dados, produzindo as mesmas soluções que uma consulta SPARQL
+executada sobre o grafo stem. %TODO stem traduzir.
+
+Com essa técnica, um banco de dados relacional pode ser exposto na web
+semântica e receber consultas SPARQL com a mesma performance de consultas
+SQL comuns.
+
+%TODO explicar mais
+
+por que integrar sparql e sql:
+- integrar bases de dados diversas
+- dados que desejamos que sejam interpretados por máquinas estão em bancos
+de dados relacionais
+- expor dados na web semântica
+
+problemas:
+- falta de padronização de técnicas de mapeamento
+
+- armazenamento relacional é mais compacto e eficiente do que as triple
+stores
+
+BGP: SPARQL basic graph pattern
+
+Um BGP pode ser quebrado em um conjunto de conjunções de triplas, onde
+cada conjunção é equivalente/se encaixa com/diz respeito aos atributos
+de uma dada relação no banco de dados. Essas conjunções podem ser
+expressas como uma única relvar. %TODO relvar?
+
+-> a SPARQL Basic Graph Pattern (BGP) can be broken down into a set
+of conjunctions of triple patterns, where each conjunct matches the
+attributes of a given relation in the database.
+
+Uma consulta SPARQL qualquer, com conjunções, disjunções e opcionais
+podem ser expressos em uma consulta SQL que pode ser executada com a
+mesma eficiência que SQL convencional.
+
+Partindo do princípio de que um banco de dados é um conjunto de relações
+em um esquema (schema). Um esquema define um título e um conjunto de
+atributos, cada um de um certo tipo de dados. Se o atributo for uma
+chave estrangeira, então o valor do atributo é algum outro atributo
+em alguma relação. Se não for uma chave estrangeira, então o atributo
+é primitivo, isto é, um valor como um número, um texto, ou uma data.
+
+% TODO  listing?
+Uma consulta SQL de exemplo pode ser definida assim:
+\textit{SELECT attrList FROM fromList WHERE whereCondition}
+
+\textit{fromList} é uma lista de tuplas que mapeiam relações para variáveis,
+chamadas relvars, que identificam um conjunto múltiplo de tuplas, as tuplas
+da relação. Uma relvar é formada por uma combinação algébrica das relvars
+de fromList.
+
+Esse mapeamento necessita apenas dos operadores INNER JOIN e LEFT OUTER JOIN,
+que são indicados por palavras-chave separando tuplas na fromList. A condição where
+é uma restrição expressa em termos de atributos dessas relvars (atributos de relvars)
+na fromList. A relvar agregada é restringida pelas condições expressas no where.
+
+A lista attList seleciona um conjunto de atributos da agregação relvar restrita
+e os renomeia, criando novos nomes de atributos, e produzindo uma nova relação
+no esquema, definido por attrList.
+
+
+O grafo de termos/raízes (\textit{stem graph}) ... %TODO
+
+
+
+%% ------------------------------------------------------------------------- %%
+\section{NoSQL}
+\label{sec:nosql}
+
+%TODO
+
+
 %% ------------------------------------------------------------------------- %%
 \subsection{MongoDB}
 \label{ssec:mongodb}
