@@ -306,13 +306,37 @@ O protótipo possui as seguintes partes:
 Uma API, ou Interface de Programação de Aplicações, é uma aplicação web que
 possui um conjunto definido de requisições e respostas HTTP, e serve para
 integrações entre sistemas ou serviços diversos. Em nosso caso, a API é um
-software que recebe mensagens de entrada com consultas em linguagem SPARQL e
-responde a essas consultas com um conjunto de triplas RDF extraídas de um banco
+software que recebe mensagens de entrada contendo uma consulta em linguagem SPARQL
+e responde a essa consulta com um conjunto de triplas RDF extraídas de um banco
 de dados.
 
-Essa API foi desenvolvida na linguagem \textit{ruby} e utiliza o framework
-\textit{ruby on rails}, que foi criado para facilitar a criação de aplicações e
-serviços web.
+Essa API foi desenvolvida em \textit{ruby}\footnotemark - uma linguagem
+orientada a objetos - e utiliza o framework \textit{ruby on rails}\footnotemark,
+criado para facilitar a criação de aplicações e serviços web.
+
+O projeto foi desenvolvido utilizando docker, que é uma plataforma aberta com
+várias ferramentas de virtualização para aplicações distribuídas, dotada dos
+chamados \textit{containers}, que são pequenas máquinas virtuais linux que são
+executadas de forma independente. Isto simplifica a configuração dos ambientes
+de desenvolvimento e de aplicação, que são inicializados segundo um arquivo
+de configuração, permitindo que sejam definidos os softwares que devem ser
+instalados em cada máquina virtual e como devem estar configurados os ambientes.
+
+Como exemplo, em nosso projeto foram criados dois \textit{containers}, um
+para rodar a aplicação web (API) e o servidor, e outro para rodar o banco
+de dados MongoDB.
+
+A API possui classes escritas na linguagem \textit{ruby}. Essas classes
+representam coleções presentes no banco de dados. Através destas classes,
+é possível consultar o banco de dados, através do Mongoid.  A API possui
+duas classes de modelo (\textit{model}) principais: \textit{Researcher},
+e \textit{Publication}. A primeira diz respeito às informações do pesquisador,
+a segunda se relaciona com publicações científicas.
+
+\footnotetext{The Ruby Language \url{https://www.ruby-lang.org/} }
+\footnotetext{Ruby on Rails \url{http://rubyonrails.org/} }
+
+% TODO docker - onde colocar?
 
 \subsection{Mapeamento}
 A API possui classes escritas na linguagem \textit{ruby}, que é uma linguagem
@@ -386,3 +410,8 @@ sem que o cliente precise saber da estrutura do banco de dados e como estão
 armazenadas as informações.
 
 % TODO falar do retorno para a ontologia ou protegé etc.
+
+
+
+% TODO colocar o docker na implementação
+
